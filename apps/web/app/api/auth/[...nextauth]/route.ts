@@ -1,7 +1,25 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import type { NextAuthOptions } from 'next-auth';
 
-const handler = NextAuth({
+declare module 'next-auth' {
+  interface User {
+    role?: string;
+    tenantId?: string;
+  }
+  interface Session {
+    user: {
+      id?: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role?: string;
+      tenantId?: string;
+    };
+  }
+}
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -10,8 +28,6 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        // TODO: Conectar con backend en Render
-        // Por ahora, demo credentials
         if (credentials?.email === 'admin@condominio.com' && credentials?.password === 'admin123') {
           return {
             id: '1',
@@ -34,8 +50,10 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.user.role = token.role;
-      session.user.tenantId = token.tenantId;
+      if (session.user) {
+        session.user.role = token.role as string;
+        session.user.tenantId = token.tenantId as string;
+      }
       return session;
     }
   },
@@ -45,6 +63,7 @@ const handler = NextAuth({
   session: {
     strategy: 'jwt',
   },
-});
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
