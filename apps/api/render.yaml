@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: condormanage-api
+    runtime: node
+    plan: starter
+    buildCommand: |
+      pnpm install
+      pnpm build
+      pnpm db:generate
+    startCommand: pnpm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://condormanage.vercel.app
+      - key: API_HOST
+        value: condormanage-api.onrender.com
+    autoDeploy: true
