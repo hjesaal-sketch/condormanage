@@ -1,34 +1,42 @@
 import { NextResponse } from 'next/server';
-import { Pool } from 'pg';
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
 
 export async function GET() {
   try {
-    const { rows } = await pool.query(
-      'SELECT * FROM invoices ORDER BY created_at DESC LIMIT 50'
-    );
-    return NextResponse.json({ invoices: rows });
-  } catch (error) {
-    console.error('Error al obtener facturas:', error);
-    return NextResponse.json(
-      { error: 'Error al obtener facturas' },
-      { status: 500 }
-    );
-  }
-}
+    // Verificar que la variable existe
+    const dbUrl = process.env.DATABASE_URL;
+    console.log('DATABASE_URL existe:', !!dbUrl);
+    console.log('Primeros 20 caracteres:', dbUrl?.substring(0, 20));
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    // Aquí iría la lógica para crear una factura
-    return NextResponse.json({ message: 'Factura creada', data: body });
-  } catch (error) {
+    if (!dbUrl) {
+      return NextResponse.json(
+        { error: 'DATABASE_URL no está configurada' },
+        { status: 500 }
+      );
+    }
+
+    // Intentar conectar usando la URL directamente
+    const { Pool } = await import('pg');
+    const pool = new Pool({
+      connectionString: dbUrl,
+      ssl: { rejectUnauthorized: false }
+    });
+
+    const { rows } = await pool.query('SELECT * FROM invoices ORDER BY created_at DESC LIMIT 50');
+    await pool.end();
+
+    return NextResponse.json({ 
+      success: true, 
+      count: rows.length,
+      invoices: rows 
+    });
+  } catch (error: any) {
+    console.error('Error completo:', error);
     return NextResponse.json(
-      { error: 'Error al crear factura' },
+      { 
+        error: 'Error al obtener facturas',
+        message: error.message,
+        stack: error.stack 
+      },
       { status: 500 }
     );
   }
