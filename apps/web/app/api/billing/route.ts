@@ -1,55 +1,38 @@
 import { NextResponse } from 'next/server';
+import { Pool } from 'pg';
 
 export async function GET() {
   try {
-    // 1. Verificar que la variable existe
-    const dbUrl = process.env.DATABASE_URL;
-    console.log('DATABASE_URL existe:', !!dbUrl);
-    console.log('Primeros 20 caracteres:', dbUrl?.substring(0, 20));
-
-    if (!dbUrl) {
-      return NextResponse.json(
-        { error: 'DATABASE_URL no está configurada' },
-        { status: 500 }
-      );
-    }
-
-    // 2. Extraer la IPv6 de la URL (si está entre corchetes)
-    const ipv6Match = dbUrl.match(/\[(.*?)\]/);
-    const host = ipv6Match ? ipv6Match[1] : undefined;
-    const isIPv6 = !!host;
-
-    console.log('Host detectado:', host || 'No IPv6 detectado');
-
-    // 3. Importar dinámicamente pg
-    const { Pool } = await import('pg');
-
-    // 4. Configurar el pool con opciones específicas para IPv6
+    // Configuración directa de la conexión (NO usa DATABASE_URL)
     const pool = new Pool({
-      connectionString: dbUrl,
-      ssl: { rejectUnauthorized: false },
-      // Si es IPv6, forzar el host y puerto manualmente
-      ...(isIPv6 && {
-        host,
-        port: 5432,
-        // Para IPv6, a veces es necesario deshabilitar el DNS lookup
-        keepAlive: true,
-        keepAliveInitialDelayMillis: 10000,
-        connectionTimeoutMillis: 15000,
-      }),
-      // Parámetros adicionales para estabilidad
-      max: 1, // Limitamos a 1 conexión para evitar problemas
-      idleTimeoutMillis: 30000,
+      user: 'postgres',
+      password: 'CondorM4n4ge2025!',
+      host: '2600:1f18:6f7d:e800:6a76:b8a7:b19f:19d9', // IPv6 sin corchetes
+      port: 5432,
+      database: 'postgres',
+      ssl: {
+        rejectUnauthorized: false,
+        require: true,
+      },
+      connectionTimeoutMillis: 15000,
+      keepAlive: true,
+      keepAliveInitialDelayMillis: 10000,
     });
 
-    // 5. Ejecutar consulta
-    const { rows } = await pool.query('SELECT * FROM invoices ORDER BY created_at DESC LIMIT 50');
+    // Probar conexión
+    const client = await pool.connect();
+    console.log('✅ Conexión establecida a Supabase');
+
+    // Ejecutar consulta
+    const result = await client.query('SELECT * FROM invoices ORDER BY created_at DESC LIMIT 50');
+    client.release();
+
     await pool.end();
 
     return NextResponse.json({
       success: true,
-      count: rows.length,
-      invoices: rows,
+      count: result.rows.length,
+      invoices: result.rows,
     });
   } catch (error: any) {
     console.error('Error completo:', error);
