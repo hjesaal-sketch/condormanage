@@ -2,23 +2,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    // LOGS PARA DEBUG
-    console.log('=== DEBUG ENV VARS ===');
-    console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
-    console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY);
-    console.log('SUPABASE_ANON_KEY length:', process.env.SUPABASE_ANON_KEY?.length);
-    console.log('=======================');
-
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
       return NextResponse.json(
-        { 
-          error: 'Faltan variables de entorno de Supabase',
-          hasUrl: !!supabaseUrl,
-          hasKey: !!supabaseKey
-        },
+        { error: 'Faltan variables de entorno de Supabase' },
         { status: 500 }
       );
     }
@@ -40,7 +29,15 @@ export async function GET() {
     }
 
     const data = await response.json();
-    return NextResponse.json({ success: true, invoices: data });
+    return NextResponse.json(
+      { success: true, invoices: data },
+      { 
+        headers: {
+          'Cache-Control': 'no-store, max-age=0, must-revalidate',
+          'Pragma': 'no-cache'
+        }
+      }
+    );
   } catch (error: any) {
     console.error('Error en la API:', error);
     return NextResponse.json(
