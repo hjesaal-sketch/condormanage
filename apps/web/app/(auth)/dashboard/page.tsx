@@ -1,25 +1,41 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { StatsCards } from '@/components/modules/dashboard/StatsCards';
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (status === 'loading') {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+
+    if (!token || !userData) {
+      router.push('/login');
+      return;
+    }
+
+    try {
+      setUser(JSON.parse(userData));
+    } catch {
+      router.push('/login');
+    } finally {
+      setLoading(false);
+    }
+  }, [router]);
+
+  if (loading) {
     return <div className="flex items-center justify-center min-h-screen">Cargando...</div>;
-  }
-
-  if (!session) {
-    redirect('/auth/login');
   }
 
   return (
     <div className="p-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-gray-600">Bienvenido, {session.user?.name || 'Administrador'}</p>
+        <p className="text-gray-600">Bienvenido, {user?.name || 'Administrador'}</p>
       </div>
       <StatsCards />
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
