@@ -1,0 +1,18 @@
+🔑 NOTA IMPORTANTE
+Como la contraseña tiene caracteres especiales (! y @), debes codificarlos en la URL:
+
+Carácter	Codificación
+   !	            %21
+   @	            %40
+
+
+postgresql://postgres:CondorM4n4ge2025%21@db.ewnkhiyxbkjaouvfqkdv.supabase.co:5432/postgres
+
+
+CondorM4n4ge2025!
+
+postgresql://postgres:CondorM4n4ge2025!@db.ewnkhiyxbkjaouvfqkdv.supabase.co:5432/postgres
+
+
+
+postgresql://postgres:CondorM4n4ge2025%21@pooler.ewnkhiyxbkjaouvfqkdv.supabase.co:6543/postgres?sslmode=require
