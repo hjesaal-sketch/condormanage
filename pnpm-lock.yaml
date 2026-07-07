@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      postcss:
+        specifier: ^8.4.0
+        version: 8.5.16
       turbo:
         specifier: ^2.0.0
         version: 2.10.1

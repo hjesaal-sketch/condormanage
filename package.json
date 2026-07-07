@@ -13,6 +13,7 @@
     "db:seed": "pnpm --filter api db:seed"
   },
   "devDependencies": {
+    "postcss": "^8.4.0",
     "turbo": "^2.0.0"
   },
   "packageManager": "pnpm@8.15.0",
