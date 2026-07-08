@@ -1,50 +1,50 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --radius: 0.5rem;
-  }
+@theme {
+  --color-background: 222.2 84% 4.9%;
+  --color-foreground: 210 40% 98%;
+  --color-card: 222.2 84% 4.9%;
+  --color-card-foreground: 210 40% 98%;
+  --color-popover: 222.2 84% 4.9%;
+  --color-popover-foreground: 210 40% 98%;
+  --color-primary: 217.2 91.2% 59.8%;
+  --color-primary-foreground: 222.2 47.4% 11.2%;
+  --color-secondary: 217.2 32.6% 17.5%;
+  --color-secondary-foreground: 210 40% 98%;
+  --color-muted: 217.2 32.6% 17.5%;
+  --color-muted-foreground: 215 20.2% 65.1%;
+  --color-accent: 217.2 32.6% 17.5%;
+  --color-accent-foreground: 210 40% 98%;
+  --color-destructive: 0 62.8% 30.6%;
+  --color-destructive-foreground: 210 40% 98%;
+  --color-border: 217.2 32.6% 17.5%;
+  --color-input: 217.2 32.6% 17.5%;
+  --color-ring: 224.3 76.3% 48%;
+  --radius: 0.5rem;
 }
 
-@layer base {
-  /* Eliminada la línea problemática: * { @apply border-border; } */
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
+body {
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-@layer components {
-  .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
-  }
-  
-  .glass-card-dark {
-    @apply bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 shadow-xl;
-  }
-  
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent;
-  }
+.glass-card {
+  background-color: rgba(255,255,255,0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.glass-card-dark {
+  background-color: rgba(17,24,39,0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(55,65,81,0.5);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #60a5fa, #a78bfa, #ec4899);
+  background-clip: text;
+  color: transparent;
 }
