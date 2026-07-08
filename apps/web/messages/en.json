@@ -1,0 +1,176 @@
+{
+  "app": {
+    "name": "CondorManage",
+    "tagline": "Condominium management system"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "email": "Email address",
+      "password": "Password",
+      "button": "Sign In",
+      "no_account": "Don't have an account?",
+      "contact_admin": "Contact the administrator",
+      "error": {
+        "invalid": "Invalid credentials",
+        "required": "Email and password are required",
+        "server": "Server error"
+      }
+    },
+    "logout": "Sign Out"
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Administrative Dashboard",
+      "welcome": "Welcome back",
+      "properties": "Properties",
+      "residents": "Residents",
+      "income": "Income",
+      "maintenance": "Maintenance",
+      "recent_activity": "Recent Activity",
+      "quick_actions": "Quick Actions",
+      "generate_fees": "Generate Fees",
+      "register_payment": "Register Payment",
+      "create_ticket": "Create Ticket",
+      "reserve_area": "Reserve Area"
+    },
+    "resident": {
+      "title": "My Portal",
+      "welcome": "Welcome",
+      "pending_fees": "Pending Fees",
+      "active_tickets": "Active Tickets",
+      "reservations": "Reservations",
+      "my_unit": "My Unit",
+      "my_invoices": "My Invoices",
+      "maintenance": "Maintenance",
+      "documents": "Documents"
+    },
+    "staff": {
+      "title": "Maintenance Panel",
+      "welcome": "Welcome",
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "total": "Total",
+      "assigned_tickets": "Assigned Tickets"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    }
+  },
+  "units": {
+    "title": "Units",
+    "number": "Number",
+    "floor": "Floor",
+    "area": "Area (sq ft)",
+    "type": "Type",
+    "status": "Status",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "parking": "Parking",
+    "types": {
+      "apartment": "Apartment",
+      "penthouse": "Penthouse",
+      "commercial": "Commercial",
+      "parking": "Parking",
+      "storage": "Storage"
+    },
+    "statuses": {
+      "available": "Available",
+      "occupied": "Occupied",
+      "maintenance": "Maintenance",
+      "rented": "Rented"
+    }
+  },
+  "billing": {
+    "title": "Billing",
+    "invoice": "Invoice",
+    "payment": "Payment",
+    "amount": "Amount",
+    "due_date": "Due date",
+    "issue_date": "Issue date",
+    "concept": "Concept",
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "overdue": "Overdue",
+      "cancelled": "Cancelled"
+    },
+    "method": {
+      "cash": "Cash",
+      "bank_transfer": "Bank transfer",
+      "mobile_payment": "Mobile payment",
+      "credit_card": "Credit card"
+    }
+  },
+  "maintenance": {
+    "title": "Maintenance",
+    "ticket": "Ticket",
+    "description": "Description",
+    "assigned_to": "Assigned to",
+    "status": {
+      "open": "Open",
+      "in_progress": "In progress",
+      "resolved": "Resolved",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    }
+  },
+  "reservations": {
+    "title": "Reservations",
+    "area": "Area",
+    "date": "Date",
+    "time": "Time",
+    "start": "Start",
+    "end": "End",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "completed": "Completed"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark_all_read": "Mark all as read",
+    "empty": "No notifications",
+    "types": {
+      "general": "General",
+      "billing": "Billing",
+      "maintenance": "Maintenance",
+      "reservation": "Reservation",
+      "security": "Security",
+      "emergency": "Emergency"
+    }
+  }
+}

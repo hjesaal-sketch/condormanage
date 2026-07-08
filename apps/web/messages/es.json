@@ -1,0 +1,176 @@
+{
+  "app": {
+    "name": "CondorManage",
+    "tagline": "Sistema de gestión de condominios"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar Sesión",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "button": "Iniciar Sesión",
+      "no_account": "¿No tienes cuenta?",
+      "contact_admin": "Contacta al administrador",
+      "error": {
+        "invalid": "Credenciales inválidas",
+        "required": "Email y contraseña son requeridos",
+        "server": "Error en el servidor"
+      }
+    },
+    "logout": "Cerrar Sesión"
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Dashboard Administrativo",
+      "welcome": "Bienvenido de vuelta",
+      "properties": "Propiedades",
+      "residents": "Residentes",
+      "income": "Ingresos",
+      "maintenance": "Mantenimiento",
+      "recent_activity": "Actividad Reciente",
+      "quick_actions": "Acciones Rápidas",
+      "generate_fees": "Generar Cuotas",
+      "register_payment": "Registrar Pago",
+      "create_ticket": "Crear Ticket",
+      "reserve_area": "Reservar Área"
+    },
+    "resident": {
+      "title": "Mi Portal",
+      "welcome": "Bienvenido",
+      "pending_fees": "Cuotas Pendientes",
+      "active_tickets": "Tickets Activos",
+      "reservations": "Reservas",
+      "my_unit": "Mi Unidad",
+      "my_invoices": "Mis Facturas",
+      "maintenance": "Mantenimiento",
+      "documents": "Documentos"
+    },
+    "staff": {
+      "title": "Panel de Mantenimiento",
+      "welcome": "Bienvenido",
+      "pending": "Pendientes",
+      "in_progress": "En Progreso",
+      "completed": "Completados",
+      "total": "Total",
+      "assigned_tickets": "Tickets Asignados"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "back": "Volver",
+    "yes": "Sí",
+    "no": "No",
+    "actions": "Acciones",
+    "status": {
+      "pending": "Pendiente",
+      "in_progress": "En progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
+    "priority": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    }
+  },
+  "units": {
+    "title": "Unidades",
+    "number": "Número",
+    "floor": "Piso",
+    "area": "Área (m²)",
+    "type": "Tipo",
+    "status": "Estado",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "parking": "Estacionamientos",
+    "types": {
+      "apartment": "Apartamento",
+      "penthouse": "Penthouse",
+      "commercial": "Comercial",
+      "parking": "Estacionamiento",
+      "storage": "Bodega"
+    },
+    "statuses": {
+      "available": "Disponible",
+      "occupied": "Ocupado",
+      "maintenance": "Mantenimiento",
+      "rented": "Alquilado"
+    }
+  },
+  "billing": {
+    "title": "Facturación",
+    "invoice": "Factura",
+    "payment": "Pago",
+    "amount": "Monto",
+    "due_date": "Fecha de vencimiento",
+    "issue_date": "Fecha de emisión",
+    "concept": "Concepto",
+    "status": {
+      "pending": "Pendiente",
+      "paid": "Pagada",
+      "overdue": "Vencida",
+      "cancelled": "Cancelada"
+    },
+    "method": {
+      "cash": "Efectivo",
+      "bank_transfer": "Transferencia bancaria",
+      "mobile_payment": "Pago móvil",
+      "credit_card": "Tarjeta de crédito"
+    }
+  },
+  "maintenance": {
+    "title": "Mantenimiento",
+    "ticket": "Ticket",
+    "description": "Descripción",
+    "assigned_to": "Asignado a",
+    "status": {
+      "open": "Abierto",
+      "in_progress": "En progreso",
+      "resolved": "Resuelto",
+      "closed": "Cerrado",
+      "cancelled": "Cancelado"
+    },
+    "priority": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    }
+  },
+  "reservations": {
+    "title": "Reservas",
+    "area": "Área",
+    "date": "Fecha",
+    "time": "Hora",
+    "start": "Inicio",
+    "end": "Fin",
+    "status": {
+      "pending": "Pendiente",
+      "approved": "Aprobada",
+      "rejected": "Rechazada",
+      "cancelled": "Cancelada",
+      "completed": "Completada"
+    }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "mark_all_read": "Marcar todo como leído",
+    "empty": "No hay notificaciones",
+    "types": {
+      "general": "General",
+      "billing": "Facturación",
+      "maintenance": "Mantenimiento",
+      "reservation": "Reserva",
+      "security": "Seguridad",
+      "emergency": "Emergencia"
+    }
+  }
+}
