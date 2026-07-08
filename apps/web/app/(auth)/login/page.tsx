@@ -36,8 +36,14 @@ export default function LoginPage() {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      // Redirigir al dashboard
-      router.push('/dashboard');
+      // Redirigir según rol
+      const roleRedirects: Record<string, string> = {
+        ADMIN: '/dashboard/admin',
+        RESIDENT: '/dashboard/resident',
+        STAFF: '/dashboard/staff',
+      };
+      const redirectPath = roleRedirects[data.user.role] || '/dashboard';
+      router.push(redirectPath);
       router.refresh(); // Forzar actualización
     } catch (err) {
       setError('Error de conexión. Inténtalo de nuevo.');
