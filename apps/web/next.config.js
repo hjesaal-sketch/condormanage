@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withNextIntl = require('next-intl/plugin')();
+
+const nextConfig = withNextIntl({
   images: {
     domains: ['avatars.githubusercontent.com'],
   },
@@ -13,10 +15,6 @@ const nextConfig = {
       },
     ];
   },
-  // 👇 AGREGAR ESTO
-  experimental: {
-    serverActions: true,
-  },
-};
+});
 
 module.exports = nextConfig;
