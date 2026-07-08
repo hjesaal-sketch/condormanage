@@ -1,0 +1,21 @@
+🗺️ HOJA DE RUTA (PRÓXIMOS MÓDULOS):
+Orden	Módulo	                                        Prioridad	Estado
+0	Internacionalización (i18n)	                Crítica 	⏳ Pendiente
+1	Unidades (CRUD)	                                Alta	        ⏳ Pendiente
+2	Residentes (CRUD + asignación a unidades)	Alta	        ⏳ Pendiente
+3	Facturación (cuotas + pagos)	                Alta	        ⏳ Pendiente
+4	Mantenimiento (tickets)	                        Media	        ⏳ Pendiente
+5	Reservas (áreas comunes)                	Media    	⏳ Pendiente
+6	Comunicaciones (notificaciones)	                Media    	⏳ Pendiente
+7	Reportes (PDF/Excel)	                        Baja	        ⏳ Pendiente
+
+
+Orden	Módulo	                                        Prioridad	Depende de
+0	Internacionalización (i18n)	                Crítica	        —
+1	Unidades (CRUD)                         	Alta	        i18n
+2	Residentes (CRUD)	                        Alta	        i18n
+3	Facturación (cuotas + pagos)	                Alta	        i18n + monedas
+4	Mantenimiento (tickets)                 	Media    	i18n
+5	Reservas (áreas comunes)                	Media	        i18n + fechas
+6	Comunicaciones (notificaciones)           	Media	        i18n
+7	Reportes (PDF/Excel)	                        Baja	        i18n + monedas

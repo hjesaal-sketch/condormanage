@@ -1,0 +1,17 @@
+🌐 URLS DE ACCESO:
+Login: https://condormanage-dpx7.vercel.app/login
+
+Admin: https://condormanage-dpx7.vercel.app/dashboard/admin
+📋 USUARIOS ACTUALES EN SUPABASE:
+Email	                        Contraseña      Rol	  Estado
+admin@condormanage.com	        Admin2025!      ADMIN	  ✅ Creado
+
+
+Resident: https://condormanage-dpx7.vercel.app/dashboard/resident
+
+resident@condormanage.com	resident123	RESIDENT  ✅ Creado
+
+
+Staff: https://condormanage-dpx7.vercel.app/dashboard/staff
+
+staff@condormanage.com	        staff123	STAFF     ✅ Creado

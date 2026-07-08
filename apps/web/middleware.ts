@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
+import { locales, defaultLocale, getLocaleFromRequest } from '@/lib/i18n';
 
 // Rutas públicas (no requieren autenticación)
 const PUBLIC_ROUTES = ['/login', '/api/auth/login', '/'];
@@ -12,23 +13,43 @@ const ROLE_ROUTES = {
   STAFF: ['/dashboard/staff', '/api/staff/*'],
 };
 
+// Generar regex para las rutas con locale (ej: /es/login, /en/dashboard/admin)
+function getPathWithoutLocale(pathname: string): string {
+  const segments = pathname.split('/');
+  if (segments.length > 1 && locales.includes(segments[1])) {
+    return '/' + segments.slice(2).join('/');
+  }
+  return pathname;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const pathWithoutLocale = getPathWithoutLocale(pathname);
 
-  // 1. Permitir rutas públicas
-  if (PUBLIC_ROUTES.some(route => pathname.startsWith(route))) {
+  // 1. Obtener locale (de URL, headers o default)
+  const locale = getLocaleFromRequest(request);
+  
+  // 2. Si la ruta no tiene locale, redirigir
+  const segments = pathname.split('/');
+  if (segments.length < 2 || !locales.includes(segments[1])) {
+    const newPath = `/${locale}${pathname}`;
+    return NextResponse.redirect(new URL(newPath, request.url));
+  }
+
+  // 3. Permitir rutas públicas
+  if (PUBLIC_ROUTES.some(route => pathWithoutLocale.startsWith(route))) {
     return NextResponse.next();
   }
 
-  // 2. Obtener token de las cookies o headers
+  // 4. Verificar token
   const token = request.cookies.get('token')?.value || 
                 request.headers.get('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
-    return redirectToLogin(request);
+    return redirectToLogin(request, locale);
   }
 
-  // 3. Verificar token
+  // 5. Verificar token con jose
   try {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret-key');
     const { payload } = await jwtVerify(token, secret);
@@ -36,32 +57,26 @@ export async function middleware(request: NextRequest) {
     const userRole = payload.role as string;
     const tenantId = payload.tenantId as string;
 
-    // 4. Verificar que el tenant esté activo (opcional)
-    // Aquí podrías consultar a Supabase si el tenant está activo
-
-    // 5. Verificar acceso según rol
+    // 6. Verificar acceso según rol
     const allowedRoutes = ROLE_ROUTES[userRole as keyof typeof ROLE_ROUTES] || [];
     const isAllowed = allowedRoutes.some(route => {
-      if (route.endsWith('/*')) {
-        const baseRoute = route.replace('/*', '');
-        return pathname.startsWith(baseRoute);
-      }
-      return pathname === route;
+      const routePattern = route.replace('/*', '');
+      return pathWithoutLocale.startsWith(routePattern);
     });
 
-    // Si la ruta no está en las rutas permitidas para su rol
-    if (!isAllowed && !pathname.startsWith('/dashboard')) {
+    if (!isAllowed && !pathWithoutLocale.startsWith('/dashboard')) {
       return NextResponse.json(
         { error: 'Acceso denegado' },
         { status: 403 }
       );
     }
 
-    // 6. Agregar datos del usuario a la request para los componentes
+    // 7. Agregar headers con datos del usuario
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-user-id', payload.id as string);
     requestHeaders.set('x-user-role', userRole);
     requestHeaders.set('x-tenant-id', tenantId);
+    requestHeaders.set('x-locale', locale);
 
     return NextResponse.next({
       request: {
@@ -70,27 +85,18 @@ export async function middleware(request: NextRequest) {
     });
 
   } catch (error) {
-    // Token inválido o expirado
-    return redirectToLogin(request);
+    return redirectToLogin(request, locale);
   }
 }
 
-function redirectToLogin(request: NextRequest) {
-  const loginUrl = new URL('/login', request.url);
+function redirectToLogin(request: NextRequest, locale: string) {
+  const loginUrl = new URL(`/${locale}/login`, request.url);
   loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
   return NextResponse.redirect(loginUrl);
 }
 
-// Configurar en qué rutas se ejecuta el middleware
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
-    '/((?!_next/static|_next/image|favicon.ico|public).*)',
+    '/((?!_next/static|_next/image|favicon.ico|public|api).*)',
   ],
 };
