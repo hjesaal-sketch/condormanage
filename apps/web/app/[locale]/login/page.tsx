@@ -1,25 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations('auth.login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [locale, setLocale] = useState('es');
 
-  useEffect(() => {
-    // Acceder a window solo en el cliente
-    const pathLocale = window.location.pathname.split('/')[1] || 'es';
-    setLocale(pathLocale);
-  }, []);
+  // Obtener locale de la URL directamente
+  const locale = pathname.split('/')[1] || 'es';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
