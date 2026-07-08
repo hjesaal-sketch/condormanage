@@ -34,6 +34,7 @@ export function getLocaleFromRequest(request: Request): string {
 // CONFIGURACIÓN DE NEXT-INTL (default export)
 // ============================================
 export default getRequestConfig(async ({ locale }) => ({
+  locale, // <-- AGREGAR ESTO
   messages: (await import(`./messages/${locale}.json`)).default,
   timeZone: 'America/Caracas',
   formats: {
