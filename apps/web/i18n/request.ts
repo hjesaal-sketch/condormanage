@@ -34,11 +34,10 @@ export function getLocaleFromRequest(request: Request): string {
 // CONFIGURACIÓN DE NEXT-INTL (default export)
 // ============================================
 export default getRequestConfig(async ({ locale }) => {
-  // Asegurar que locale siempre sea string
   const safeLocale = locale || defaultLocale;
   return {
     locale: safeLocale,
-    messages: (await import(`./messages/${safeLocale}.json`)).default,
+    messages: (await import(`../messages/${safeLocale}.json`)).default,
     timeZone: 'America/Caracas',
     formats: {
       number: {
