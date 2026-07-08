@@ -7,17 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============================================================
+// 1. TENANT (MULTI-TENANT CON CONFIGURACIÓN INTERNACIONAL)
+// ============================================================
 model Tenant {
   id           String    @id @default(cuid())
   name         String
   subdomain    String    @unique
-  config       Json?
+  config       Json?     // Configuración general (logo, colores, etc)
   status       TenantStatus @default(ACTIVE)
+  
+  // 🌍 Internacionalización
+  currency     String    @default("USD")    // USD, EUR, VES, COP, etc
+  timezone     String    @default("America/Caracas")
+  locale       String    @default("es")     // es, en, pt
+  country      String    @default("VE")     // Código ISO 3166-1
+  taxRate      Float?    @default(0.0)      // IVA o impuesto local (%)
+  
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   
   users        User[]
   units        Unit[]
+  commonAreas  CommonArea[]
+  invoices     Invoice[]
+  tickets      MaintenanceTicket[]
+  reservations Reservation[]
+  notifications Notification[]
+  documents    Document[]
+  reports      Report[]
+  settings     Setting[]
 }
 
 enum TenantStatus {
@@ -26,26 +45,46 @@ enum TenantStatus {
   SUSPENDED
 }
 
+// ============================================================
+// 2. USERS (AUTENTICACIÓN + ROLES + IDIOMA)
+// ============================================================
 model User {
   id           String    @id @default(cuid())
   email        String    @unique
   name         String
   password     String    // Hashed
   role         Role      @default(RESIDENT)
+  
+  // 🌍 Preferencias de idioma
+  language     String    @default("es")    // es, en, pt
+  
+  // 📊 Auditoría
+  lastLoginAt  DateTime?
+  isActive     Boolean   @default(true)
+  
   tenantId     String
   tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   
   units        UnitUserRel[]
+  reservations Reservation[]
+  tickets      MaintenanceTicket[]  // Tickets creados
+  notifications Notification[]
+  auditLogs    AuditLog[]
 }
 
 enum Role {
   ADMIN
   RESIDENT
+  STAFF
   GUEST
 }
 
+// ============================================================
+// 3. UNITS (APARTAMENTOS) + RELACIÓN CON USUARIOS
+// ============================================================
 model Unit {
   id           String    @id @default(cuid())
   tenantId     String
@@ -55,11 +94,18 @@ model Unit {
   area         Float?
   type         UnitType  @default(APARTMENT)
   status       UnitStatus @default(AVAILABLE)
+  
+  // 📊 Datos adicionales
+  bedrooms     Int?
+  bathrooms    Int?
+  parkingSpaces Int?     @default(1)
+  
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   
   users        UnitUserRel[]
   invoices     Invoice[]
+  tickets      MaintenanceTicket[]
 }
 
 enum UnitType {
@@ -67,12 +113,14 @@ enum UnitType {
   PENTHOUSE
   COMMERCIAL
   PARKING
+  STORAGE
 }
 
 enum UnitStatus {
   AVAILABLE
   OCCUPIED
   MAINTENANCE
+  RENTED
 }
 
 model UnitUserRel {
@@ -84,27 +132,130 @@ model UnitUserRel {
   relationship Relationship @default(OWNER)
   startDate    DateTime
   endDate      DateTime?
+  isPrimary    Boolean   @default(false)  // Residente principal
 }
 
 enum Relationship {
   OWNER
   TENANT
   RESIDENT
+  CO_OWNER
 }
 
+// ============================================================
+// 4. COMMON AREAS (ÁREAS COMUNES PARA RESERVAS)
+// ============================================================
+model CommonArea {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  name         String
+  description  String?
+  capacity     Int?
+  requiresApproval Boolean @default(false)
+  config       Json?     // Horarios, días, etc
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  reservations Reservation[]
+}
+
+// ============================================================
+// 5. RESERVATIONS (RESERVAS DE ÁREAS COMUNES)
+// ============================================================
+model Reservation {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  unitId       String
+  unit         Unit      @relation(fields: [unitId], references: [id])
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  areaId       String
+  area         CommonArea @relation(fields: [areaId], references: [id])
+  
+  date         DateTime
+  startTime    DateTime
+  endTime      DateTime
+  status       ReservationStatus @default(PENDING)
+  notes        String?
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+enum ReservationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+  COMPLETED
+}
+
+// ============================================================
+// 6. MAINTENANCE TICKETS
+// ============================================================
+model MaintenanceTicket {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  unitId       String
+  unit         Unit      @relation(fields: [unitId], references: [id])
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  
+  title        String
+  description  String
+  priority     TicketPriority @default(MEDIUM)
+  status       TicketStatus @default(OPEN)
+  assignedTo   String?   // ID de usuario (staff)
+  resolvedAt   DateTime?
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  CANCELLED
+}
+
+// ============================================================
+// 7. INVOICES & PAYMENTS (CON MONEDAS Y TAX)
+// ============================================================
 model Invoice {
   id           String    @id @default(cuid())
   tenantId     String
   tenant       Tenant    @relation(fields: [tenantId], references: [id])
   unitId       String
   unit         Unit      @relation(fields: [unitId], references: [id])
+  
   number       String    @unique
   issueDate    DateTime
   dueDate      DateTime
-  amount       Decimal   @db.Decimal(10,2)
+  
+  // 💰 Moneda + montos
+  currency     String    @default("USD")
+  subtotal     Decimal   @db.Decimal(10,2)
+  taxAmount    Decimal   @db.Decimal(10,2) @default(0)
+  amount       Decimal   @db.Decimal(10,2)  // subtotal + taxAmount
+  exchangeRate Float?    // Tasa de cambio si es en otra moneda
+  
   concept      String
   status       InvoiceStatus @default(PENDING)
   metadata     Json?
+  
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   
@@ -112,21 +263,28 @@ model Invoice {
 }
 
 enum InvoiceStatus {
+  DRAFT
   PENDING
   PAID
   OVERDUE
   CANCELLED
+  VOID
 }
 
 model Payment {
   id           String    @id @default(cuid())
   invoiceId    String
   invoice      Invoice   @relation(fields: [invoiceId], references: [id])
+  
   amount       Decimal   @db.Decimal(10,2)
+  currency     String    @default("USD")
+  exchangeRate Float?    // Tasa de cambio aplicada
+  
   date         DateTime
   method       PaymentMethod
   reference    String?
   status       PaymentStatus @default(COMPLETED)
+  
   createdAt    DateTime  @default(now())
 }
 
@@ -135,6 +293,8 @@ enum PaymentMethod {
   BANK_TRANSFER
   MOBILE_PAYMENT
   CREDIT_CARD
+  DEBIT_CARD
+  CRYPTO
 }
 
 enum PaymentStatus {
@@ -142,30 +302,205 @@ enum PaymentStatus {
   COMPLETED
   FAILED
   REFUNDED
+  CANCELLED
 }
 
-model AuditLog {
+// ============================================================
+// 8. NOTIFICATIONS (COMUNICACIONES MULTI-CANAL)
+// ============================================================
+model Notification {
   id           String    @id @default(cuid())
-  userId       String
   tenantId     String
-  action       String
-  module       String
-  entityId     String?
-  changes      Json?
-  ip           String?
-  userAgent    String?
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  
+  title        String
+  message      String
+  type         NotificationType @default(GENERAL)
+  channel      NotificationChannel @default(IN_APP)
+  status       NotificationStatus @default(SENT)
+  readAt       DateTime?
+  
+  // Datos de envío
+  sentAt       DateTime  @default(now())
+  deliveredAt  DateTime?
+  
   createdAt    DateTime  @default(now())
 }
 
+enum NotificationType {
+  GENERAL
+  BILLING
+  MAINTENANCE
+  RESERVATION
+  SECURITY
+  EMERGENCY
+}
+
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+  SMS
+  PUSH
+  WHATSAPP
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+// ============================================================
+// 9. DOCUMENTS (GESTIÓN DOCUMENTAL)
+// ============================================================
+model Document {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  
+  title        String
+  description  String?
+  fileUrl      String    // URL en S3 / R2
+  fileSize     Int?      // En bytes
+  mimeType     String?
+  category     DocumentCategory @default(GENERAL)
+  tags         String[]  // Array de etiquetas
+  
+  // Relación polimórfica (opcional)
+  relatedEntityId String?
+  relatedEntityType String?
+  
+  uploaderId   String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  versions     DocumentVersion[]
+}
+
+enum DocumentCategory {
+  GENERAL
+  CONTRACT
+  INVOICE
+  REPORT
+  MINUTES
+  RULES
+  MAINTENANCE
+  OTHER
+}
+
+model DocumentVersion {
+  id           String    @id @default(cuid())
+  documentId   String
+  document     Document  @relation(fields: [documentId], references: [id])
+  
+  version      Int       @default(1)
+  fileUrl      String
+  fileSize     Int?
+  mimeType     String?
+  changes      String?
+  uploaderId   String
+  
+  createdAt    DateTime  @default(now())
+}
+
+// ============================================================
+// 10. REPORTS (REPORTES PROGRAMADOS)
+// ============================================================
+model Report {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  
+  name         String
+  description  String?
+  type         ReportType
+  format       ReportFormat @default(PDF)
+  config       Json?     // Filtros, parámetros
+  
+  // Programación
+  schedule     String?   // Cron expression (ej: "0 0 * * *")
+  lastRunAt    DateTime?
+  nextRunAt    DateTime?
+  
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  executions   ReportExecution[]
+}
+
+enum ReportType {
+  FINANCIAL
+  MAINTENANCE
+  OCCUPANCY
+  RESERVATIONS
+  CUSTOM
+}
+
+enum ReportFormat {
+  PDF
+  EXCEL
+  CSV
+  JSON
+}
+
+model ReportExecution {
+  id           String    @id @default(cuid())
+  reportId     String
+  report       Report    @relation(fields: [reportId], references: [id])
+  
+  startedAt    DateTime  @default(now())
+  completedAt  DateTime?
+  status       ReportExecutionStatus @default(PENDING)
+  fileUrl      String?   // URL del archivo generado
+  error        String?
+  
+  createdAt    DateTime  @default(now())
+}
+
+enum ReportExecutionStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+// ============================================================
+// 11. SETTINGS (CONFIGURACIÓN POR TENANT)
+// ============================================================
 model Setting {
   id           String    @id @default(cuid())
   tenantId     String
   tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  
   key          String
   value        Json
-  group        String?   // billing, maintenance, etc
+  group        String?   // billing, maintenance, notifications, ui
+  
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
   @@unique([tenantId, key])
+}
+
+// ============================================================
+// 12. AUDIT LOG (TRAZABILIDAD)
+// ============================================================
+model AuditLog {
+  id           String    @id @default(cuid())
+  userId       String
+  tenantId     String
+  
+  action       String    // CREATE, UPDATE, DELETE, VIEW, etc
+  module       String    // billing, maintenance, users, etc
+  entityId     String?   // ID del registro afectado
+  changes      Json?     // Antes/después
+  ip           String?
+  userAgent    String?
+  
+  createdAt    DateTime  @default(now())
 }
