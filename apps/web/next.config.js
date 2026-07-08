@@ -13,7 +13,7 @@ const nextConfig = {
       },
     ];
   },
-  // Configuración de next-intl
+  // 👇 AGREGAR ESTO
   experimental: {
     serverActions: true,
   },
