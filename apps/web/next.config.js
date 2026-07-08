@@ -13,6 +13,10 @@ const nextConfig = {
       },
     ];
   },
+  // Configuración de next-intl
+  experimental: {
+    serverActions: true,
+  },
 };
 
 module.exports = nextConfig;
