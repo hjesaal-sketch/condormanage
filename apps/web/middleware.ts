@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
-import { locales, defaultLocale, getLocaleFromRequest } from '@/i18n';
+import { locales, defaultLocale, getLocaleFromRequest } from '@/i18n/request';
 
 // Rutas públicas (no requieren autenticación)
 const PUBLIC_ROUTES = ['/login', '/api/auth/login', '/'];
