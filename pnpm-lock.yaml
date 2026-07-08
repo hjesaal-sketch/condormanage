@@ -73,8 +73,8 @@ importers:
         specifier: ^4.0.0
         version: 4.3.2
       '@tailwindcss/postcss':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^4.3.2
+        version: 4.3.2
       '@tanstack/react-query':
         specifier: ^5.101.2
         version: 5.101.2(react@18.3.1)
@@ -1295,15 +1295,14 @@ packages:
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.2
     dev: false
 
-  /@tailwindcss/postcss@4.0.0:
-    resolution: {integrity: sha512-lI2bPk4TvwavHdehjr5WiC6HnZ59hacM6ySEo4RM/H7tsjWd8JpqiNW9ThH7rO/yKtrn4mGBoXshpvn8clXjPg==}
+  /@tailwindcss/postcss@4.3.2:
+    resolution: {integrity: sha512-rjVWYCa7Ngbi5AarT6k8TkxUG3Wl1QKzHdIZVsjZSzf36Jmo2IKZt/NHRAwly8oDkbBOH0YTu+CHuf9jPxMc+g==}
     dependencies:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.3.2
       '@tailwindcss/oxide': 4.3.2
-      lightningcss: 1.32.0
       postcss: 8.5.16
-      tailwindcss: 4.0.0
+      tailwindcss: 4.3.2
     dev: false
 
   /@tanstack/query-core@5.101.2:
@@ -2506,10 +2505,6 @@ packages:
 
   /tailwind-merge@3.6.0:
     resolution: {integrity: sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w==}
-    dev: false
-
-  /tailwindcss@4.0.0:
-    resolution: {integrity: sha512-ULRPI3A+e39T7pSaf1xoi58AqqJxVCLg8F/uM5A3FadUbnyDTgltVnXJvdkTjwCOGA6NazqHVcwPJC5h2vRYVQ==}
     dev: false
 
   /tailwindcss@4.3.2:
