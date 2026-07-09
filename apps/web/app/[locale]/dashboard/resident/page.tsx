@@ -65,8 +65,8 @@ export default function ResidentDashboardPage() {
         <div className="flex-1 overflow-y-auto p-6">
           <nav className="space-y-1">
             <SidebarItem icon={Home} label={t('title')} active />
-            <SidebarItem icon={User} label={commonT('my_unit')} />
-            <SidebarItem icon={CreditCard} label={commonT('my_invoices')} />
+            <SidebarItem icon={User} label={t('my_unit')} />
+            <SidebarItem icon={CreditCard} label={t('my_invoices')} />
             <SidebarItem icon={Wrench} label={t('maintenance')} />
             <SidebarItem icon={Calendar} label={commonT('reservations')} />
             <SidebarItem icon={FileText} label={commonT('documents')} />
