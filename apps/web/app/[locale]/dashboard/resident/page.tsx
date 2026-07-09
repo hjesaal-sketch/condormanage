@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Home, CreditCard, Wrench, Calendar, Bell, LogOut, Menu, X, FileText, User } from 'lucide-react';
 
-export default function ResidentDashboardPage() {
+export default function AdminDashboardPage() {
   const router = useRouter();
-  const t = useTranslations('dashboard.resident');
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'es';
+  const t = useTranslations('dashboard.admin');
   const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -39,7 +41,7 @@ export default function ResidentDashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    router.push('/login');
+    router.push(`/${locale}/login`);
   };
 
   if (loading) {

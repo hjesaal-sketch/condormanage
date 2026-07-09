@@ -20,6 +20,8 @@ import {
 
 export default function AdminDashboardPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'es';
   const t = useTranslations('dashboard.admin');
   const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
@@ -52,7 +54,7 @@ export default function AdminDashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    router.push('/login');
+    router.push(`/${locale}/login`);
   };
 
   if (loading) {
