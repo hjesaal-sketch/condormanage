@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -99,7 +100,6 @@ export default function AdminDashboardPage() {
 
       {/* Main Content */}
       <div className="lg:ml-64 flex-1">
-        {/* Top Bar */}
         <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
           <div className="flex items-center justify-between px-6 py-4">
             <button className="lg:hidden" onClick={() => setSidebarOpen(true)}>
@@ -123,14 +123,12 @@ export default function AdminDashboardPage() {
           </div>
         </header>
 
-        {/* Page Content */}
         <main className="p-6">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-gray-800">{t('title')}</h1>
             <p className="text-gray-500">{t('welcome')}, {user?.name || 'Administrador'}</p>
           </div>
 
-          {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <StatCard icon={Building2} title={t('properties')} value="20" change="+2" color="blue" />
             <StatCard icon={Users} title={t('residents')} value="45" change="+5" color="green" />
@@ -138,7 +136,6 @@ export default function AdminDashboardPage() {
             <StatCard icon={Wrench} title={t('maintenance')} value="3" change="-" color="orange" />
           </div>
 
-          {/* Recent Activity */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('recent_activity')}</h3>
@@ -165,19 +162,18 @@ export default function AdminDashboardPage() {
   );
 }
 
-// Componentes Auxiliares
 function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: any; user: any; handleLogout: () => void }) {
   return (
     <nav className="space-y-1">
-      <SidebarItem icon={LayoutDashboard} label={t('title')} active />
-      <SidebarItem icon={Building2} label={commonT('units')} />
-      <SidebarItem icon={Building2} label={t('properties')} />
-      <SidebarItem icon={Users} label={t('residents')} />
-      <SidebarItem icon={DollarSign} label={t('income')} />
-      <SidebarItem icon={Wrench} label={t('maintenance')} />
-      <SidebarItem icon={Calendar} label={commonT('reservations')} />
-      <SidebarItem icon={FileText} label={commonT('documents')} />
-      <SidebarItem icon={Settings} label={commonT('settings')} />
+      <SidebarItem icon={LayoutDashboard} label={t('title')} href="/dashboard/admin" active />
+      <SidebarItem icon={Building2} label={commonT('units')} href="/dashboard/admin/units" />
+      <SidebarItem icon={Building2} label={t('properties')} href="/dashboard/admin/properties" />
+      <SidebarItem icon={Users} label={t('residents')} href="/dashboard/admin/residents" />
+      <SidebarItem icon={DollarSign} label={t('income')} href="/dashboard/admin/billing" />
+      <SidebarItem icon={Wrench} label={t('maintenance')} href="/dashboard/admin/maintenance" />
+      <SidebarItem icon={Calendar} label={commonT('reservations')} href="/dashboard/admin/reservations" />
+      <SidebarItem icon={FileText} label={commonT('documents')} href="/dashboard/admin/documents" />
+      <SidebarItem icon={Settings} label={commonT('settings')} href="/dashboard/admin/settings" />
       <div className="pt-6 mt-6 border-t border-gray-100">
         <button 
           onClick={handleLogout}
@@ -191,12 +187,15 @@ function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: a
   );
 }
 
-function SidebarItem({ icon: Icon, label, active = false }: { icon: any; label: string; active?: boolean }) {
+function SidebarItem({ icon: Icon, label, href, active = false }: { icon: any; label: string; href: string; active?: boolean }) {
   return (
-    <a href="#" className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all ${active ? 'bg-blue-50 text-blue-700 font-medium shadow-sm' : 'text-gray-600 hover:bg-gray-50'}`}>
+    <Link
+      href={href}
+      className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all ${active ? 'bg-blue-50 text-blue-700 font-medium shadow-sm' : 'text-gray-600 hover:bg-gray-50'}`}
+    >
       <Icon className="w-5 h-5" />
       <span>{label}</span>
-    </a>
+    </Link>
   );
 }
 
