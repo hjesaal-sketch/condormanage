@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { ClipboardList, Wrench, CheckCircle, Clock, AlertCircle, Bell, LogOut, Menu, X, Home } from 'lucide-react';
 
 export default function StaffDashboardPage() {
   const router = useRouter();
+  const t = useTranslations('dashboard.staff');
+  const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -59,17 +62,17 @@ export default function StaffDashboardPage() {
         </div>
         <div className="flex-1 overflow-y-auto p-6">
           <nav className="space-y-1">
-            <SidebarItem icon={Home} label="Panel" active />
-            <SidebarItem icon={ClipboardList} label="Mis Tickets" />
-            <SidebarItem icon={Wrench} label="Tareas" />
-            <SidebarItem icon={Clock} label="Historial" />
+            <SidebarItem icon={Home} label={t('title')} active />
+            <SidebarItem icon={ClipboardList} label={t('my_tickets')} />
+            <SidebarItem icon={Wrench} label={t('tasks')} />
+            <SidebarItem icon={Clock} label={t('history')} />
             <div className="pt-6 mt-6 border-t border-gray-100">
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-3 w-full px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
               >
                 <LogOut className="w-5 h-5" />
-                <span className="font-medium">Cerrar Sesión</span>
+                <span className="font-medium">{commonT('logout')}</span>
               </button>
             </div>
           </nav>
@@ -94,7 +97,7 @@ export default function StaffDashboardPage() {
                 </div>
                 <div className="hidden sm:block">
                   <p className="text-sm font-medium text-gray-800">{user?.name || 'Staff'}</p>
-                  <p className="text-xs text-gray-500">Mantenimiento</p>
+                  <p className="text-xs text-gray-500">{t('role')}</p>
                 </div>
               </div>
             </div>
@@ -103,24 +106,40 @@ export default function StaffDashboardPage() {
 
         <main className="p-6">
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-800">Panel de Mantenimiento</h1>
-            <p className="text-gray-500">Bienvenido, {user?.name || 'Staff'}</p>
+            <h1 className="text-2xl font-bold text-gray-800">{t('title')}</h1>
+            <p className="text-gray-500">{t('welcome')}, {user?.name || 'Staff'}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <StaffStat icon={AlertCircle} title="Pendientes" value="5" color="red" />
-            <StaffStat icon={Clock} title="En Progreso" value="3" color="orange" />
-            <StaffStat icon={CheckCircle} title="Completados" value="12" color="green" />
-            <StaffStat icon={Wrench} title="Total" value="20" color="blue" />
+            <StaffStat icon={AlertCircle} title={t('pending')} value="5" color="red" />
+            <StaffStat icon={Clock} title={t('in_progress')} value="3" color="orange" />
+            <StaffStat icon={CheckCircle} title={t('completed')} value="12" color="green" />
+            <StaffStat icon={Wrench} title={t('total')} value="20" color="blue" />
           </div>
 
           <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">📋 Tickets Asignados</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('assigned_tickets')}</h3>
             <div className="space-y-3">
-              <TicketItem title="Fuga de agua en Apartamento 101" priority="Alta" status="En Progreso" />
-              <TicketItem title="Luces del pasillo no funcionan" priority="Media" status="Pendiente" />
-              <TicketItem title="Aire acondicionado dañado" priority="Alta" status="Pendiente" />
-              <TicketItem title="Pintura de fachada" priority="Baja" status="Completado" />
+              <TicketItem 
+                title={t('ticket_water')} 
+                priority={t('priority.high')} 
+                status={t('status.in_progress')} 
+              />
+              <TicketItem 
+                title={t('ticket_lights')} 
+                priority={t('priority.medium')} 
+                status={t('status.pending')} 
+              />
+              <TicketItem 
+                title={t('ticket_ac')} 
+                priority={t('priority.high')} 
+                status={t('status.pending')} 
+              />
+              <TicketItem 
+                title={t('ticket_paint')} 
+                priority={t('priority.low')} 
+                status={t('status.completed')} 
+              />
             </div>
           </div>
         </main>

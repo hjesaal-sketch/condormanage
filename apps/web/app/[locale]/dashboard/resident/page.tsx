@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Home, CreditCard, Wrench, Calendar, Bell, LogOut, Menu, X, FileText, User } from 'lucide-react';
 
 export default function ResidentDashboardPage() {
   const router = useRouter();
+  const t = useTranslations('dashboard.resident');
+  const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -59,19 +62,19 @@ export default function ResidentDashboardPage() {
         </div>
         <div className="flex-1 overflow-y-auto p-6">
           <nav className="space-y-1">
-            <SidebarItem icon={Home} label="Inicio" active />
-            <SidebarItem icon={User} label="Mi Unidad" />
-            <SidebarItem icon={CreditCard} label="Mis Facturas" />
-            <SidebarItem icon={Wrench} label="Mantenimiento" />
-            <SidebarItem icon={Calendar} label="Reservas" />
-            <SidebarItem icon={FileText} label="Documentos" />
+            <SidebarItem icon={Home} label={t('title')} active />
+            <SidebarItem icon={User} label={t('my_unit')} />
+            <SidebarItem icon={CreditCard} label={t('my_invoices')} />
+            <SidebarItem icon={Wrench} label={t('maintenance')} />
+            <SidebarItem icon={Calendar} label={t('reservations')} />
+            <SidebarItem icon={FileText} label={t('documents')} />
             <div className="pt-6 mt-6 border-t border-gray-100">
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-3 w-full px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
               >
                 <LogOut className="w-5 h-5" />
-                <span className="font-medium">Cerrar Sesión</span>
+                <span className="font-medium">{commonT('logout')}</span>
               </button>
             </div>
           </nav>
@@ -80,7 +83,6 @@ export default function ResidentDashboardPage() {
 
       {/* Main Content */}
       <div className="lg:ml-64 flex-1">
-        {/* Top Bar */}
         <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
           <div className="flex items-center justify-between px-6 py-4">
             <button className="lg:hidden" onClick={() => setSidebarOpen(true)}>
@@ -97,7 +99,7 @@ export default function ResidentDashboardPage() {
                 </div>
                 <div className="hidden sm:block">
                   <p className="text-sm font-medium text-gray-800">{user?.name || 'Residente'}</p>
-                  <p className="text-xs text-gray-500">Residente</p>
+                  <p className="text-xs text-gray-500">{t('role')}</p>
                 </div>
               </div>
             </div>
@@ -106,30 +108,58 @@ export default function ResidentDashboardPage() {
 
         <main className="p-6">
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-800">Mi Portal</h1>
-            <p className="text-gray-500">Bienvenido, {user?.name || 'Residente'}</p>
+            <h1 className="text-2xl font-bold text-gray-800">{t('title')}</h1>
+            <p className="text-gray-500">{t('welcome')}, {user?.name || 'Residente'}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <ResidentCard icon={CreditCard} title="Cuotas Pendientes" value="2" subtitle="Total: $300.000" color="red" />
-            <ResidentCard icon={Wrench} title="Tickets Activos" value="1" subtitle="En revisión" color="orange" />
-            <ResidentCard icon={Calendar} title="Reservas" value="3" subtitle="Próxima: Salón Comunal" color="blue" />
+            <ResidentCard 
+              icon={CreditCard} 
+              title={t('pending_fees')} 
+              value="2" 
+              subtitle={`${t('total')}: $300.000`} 
+              color="red" 
+            />
+            <ResidentCard 
+              icon={Wrench} 
+              title={t('active_tickets')} 
+              value="1" 
+              subtitle={t('in_review')} 
+              color="orange" 
+            />
+            <ResidentCard 
+              icon={Calendar} 
+              title={t('reservations')} 
+              value="3" 
+              subtitle={`${t('next')}: ${t('common_area')}`} 
+              color="blue" 
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">📋 Últimas Facturas</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('last_invoices')}</h3>
               <div className="space-y-3">
-                <InvoiceItem concept="Cuota de Mantenimiento" amount="$150.000" status="Pendiente" date="15/06/2026" />
-                <InvoiceItem concept="Cuota de Mantenimiento" amount="$150.000" status="Pagada" date="15/05/2026" />
+                <InvoiceItem 
+                  concept={t('maintenance_fee')} 
+                  amount="$150.000" 
+                  status={t('status.pending')} 
+                  date="15/06/2026" 
+                />
+                <InvoiceItem 
+                  concept={t('maintenance_fee')} 
+                  amount="$150.000" 
+                  status={t('status.paid')} 
+                  date="15/05/2026" 
+                />
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">⚡ Acciones Rápidas</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('quick_actions')}</h3>
               <div className="space-y-3">
-                <QuickAction icon={Wrench} label="Reportar Mantenimiento" color="orange" />
-                <QuickAction icon={Calendar} label="Reservar Área Común" color="blue" />
-                <QuickAction icon={CreditCard} label="Pagar Cuotas" color="green" />
+                <QuickAction icon={Wrench} label={t('report_maintenance')} color="orange" />
+                <QuickAction icon={Calendar} label={t('reserve_area')} color="blue" />
+                <QuickAction icon={CreditCard} label={t('pay_fees')} color="green" />
               </div>
             </div>
           </div>

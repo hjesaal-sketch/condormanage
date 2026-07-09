@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { 
   LayoutDashboard, 
   Building2, 
@@ -19,6 +20,8 @@ import {
 
 export default function AdminDashboardPage() {
   const router = useRouter();
+  const t = useTranslations('dashboard.admin');
+  const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -34,7 +37,6 @@ export default function AdminDashboardPage() {
 
     try {
       const parsedUser = JSON.parse(userData);
-      // Verificar que sea ADMIN
       if (parsedUser.role !== 'ADMIN') {
         router.push(`/dashboard/${parsedUser.role.toLowerCase()}`);
         return;
@@ -76,7 +78,7 @@ export default function AdminDashboardPage() {
               <X className="w-6 h-6 text-gray-500" />
             </button>
           </div>
-          <SidebarContent user={user} handleLogout={handleLogout} />
+          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} />
         </div>
       </div>
 
@@ -89,7 +91,7 @@ export default function AdminDashboardPage() {
           <span className="text-xl font-bold text-gray-800">CondorManage</span>
         </div>
         <div className="flex-1 overflow-y-auto p-6">
-          <SidebarContent user={user} handleLogout={handleLogout} />
+          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} />
         </div>
       </div>
 
@@ -122,36 +124,36 @@ export default function AdminDashboardPage() {
         {/* Page Content */}
         <main className="p-6">
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-800">Dashboard Administrativo</h1>
-            <p className="text-gray-500">Bienvenido de vuelta, {user?.name || 'Administrador'}</p>
+            <h1 className="text-2xl font-bold text-gray-800">{t('title')}</h1>
+            <p className="text-gray-500">{t('welcome')}, {user?.name || 'Administrador'}</p>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <StatCard icon={Building2} title="Propiedades" value="20" change="+2" color="blue" />
-            <StatCard icon={Users} title="Residentes" value="45" change="+5" color="green" />
-            <StatCard icon={DollarSign} title="Ingresos" value="$12,500" change="+8%" color="purple" />
-            <StatCard icon={Wrench} title="Mantenimiento" value="3" change="-" color="orange" />
+            <StatCard icon={Building2} title={t('properties')} value="20" change="+2" color="blue" />
+            <StatCard icon={Users} title={t('residents')} value="45" change="+5" color="green" />
+            <StatCard icon={DollarSign} title={t('income')} value="$12,500" change="+8%" color="purple" />
+            <StatCard icon={Wrench} title={t('maintenance')} value="3" change="-" color="orange" />
           </div>
 
           {/* Recent Activity */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">📋 Actividad Reciente</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('recent_activity')}</h3>
               <div className="space-y-4">
-                <ActivityItem icon={FileText} text="Factura #001 creada para Apartamento 101" time="Hace 2h" />
-                <ActivityItem icon={DollarSign} text="Pago registrado de $150.000" time="Hace 4h" />
-                <ActivityItem icon={Wrench} text="Ticket de mantenimiento #003 abierto" time="Hace 6h" />
-                <ActivityItem icon={Users} text="Nuevo residente registrado" time="Hace 1d" />
+                <ActivityItem icon={FileText} text={t('activity.factura')} time={t('activity.hace_2h')} />
+                <ActivityItem icon={DollarSign} text={t('activity.pago')} time={t('activity.hace_4h')} />
+                <ActivityItem icon={Wrench} text={t('activity.ticket')} time={t('activity.hace_6h')} />
+                <ActivityItem icon={Users} text={t('activity.residente')} time={t('activity.hace_1d')} />
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">⚡ Acciones Rápidas</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('quick_actions')}</h3>
               <div className="space-y-3">
-                <QuickAction icon={FileText} label="Generar Cuotas" color="blue" />
-                <QuickAction icon={DollarSign} label="Registrar Pago" color="green" />
-                <QuickAction icon={Wrench} label="Crear Ticket" color="orange" />
-                <QuickAction icon={Calendar} label="Reservar Área" color="purple" />
+                <QuickAction icon={FileText} label={t('generate_fees')} color="blue" />
+                <QuickAction icon={DollarSign} label={t('register_payment')} color="green" />
+                <QuickAction icon={Wrench} label={t('create_ticket')} color="orange" />
+                <QuickAction icon={Calendar} label={t('reserve_area')} color="purple" />
               </div>
             </div>
           </div>
@@ -162,14 +164,14 @@ export default function AdminDashboardPage() {
 }
 
 // Componentes Auxiliares
-function SidebarContent({ user, handleLogout }: { user: any; handleLogout: () => void }) {
+function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: any; user: any; handleLogout: () => void }) {
   return (
     <nav className="space-y-1">
-      <SidebarItem icon={LayoutDashboard} label="Dashboard" active />
-      <SidebarItem icon={Building2} label="Propiedades" />
-      <SidebarItem icon={Users} label="Residentes" />
-      <SidebarItem icon={DollarSign} label="Finanzas" />
-      <SidebarItem icon={Wrench} label="Mantenimiento" />
+      <SidebarItem icon={LayoutDashboard} label={t('title')} active />
+      <SidebarItem icon={Building2} label={t('properties')} />
+      <SidebarItem icon={Users} label={t('residents')} />
+      <SidebarItem icon={DollarSign} label={t('income')} />
+      <SidebarItem icon={Wrench} label={t('maintenance')} />
       <SidebarItem icon={Calendar} label="Reservas" />
       <SidebarItem icon={FileText} label="Documentos" />
       <SidebarItem icon={Settings} label="Configuración" />
@@ -179,7 +181,7 @@ function SidebarContent({ user, handleLogout }: { user: any; handleLogout: () =>
           className="flex items-center gap-3 w-full px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
         >
           <LogOut className="w-5 h-5" />
-          <span className="font-medium">Cerrar Sesión</span>
+          <span className="font-medium">{commonT('logout')}</span>
         </button>
       </div>
     </nav>
