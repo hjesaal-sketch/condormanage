@@ -16,8 +16,7 @@
         "required": "Email y contraseña son requeridos",
         "server": "Error en el servidor"
       }
-    },
-    "logout": "Cerrar Sesión"
+    }
   },
   "dashboard": {
     "admin": {
@@ -32,7 +31,17 @@
       "generate_fees": "Generar Cuotas",
       "register_payment": "Registrar Pago",
       "create_ticket": "Crear Ticket",
-      "reserve_area": "Reservar Área"
+      "reserve_area": "Reservar Área",
+      "activity": {
+        "factura": "Factura #001 creada para Apartamento 101",
+        "hace_2h": "Hace 2 horas",
+        "pago": "Pago registrado de $150.000",
+        "hace_4h": "Hace 4 horas",
+        "ticket": "Ticket de mantenimiento #003 abierto",
+        "hace_6h": "Hace 6 horas",
+        "residente": "Nuevo residente registrado",
+        "hace_1d": "Hace 1 día"
+      }
     },
     "resident": {
       "title": "Mi Portal",
@@ -66,7 +75,7 @@
     "yes": "Sí",
     "no": "No",
     "actions": "Acciones",
-    "logout": "Salir",
+    "logout": "Cerrar Sesión",
     "units": "Unidades",
     "reservations": "Reservas",
     "documents": "Documentos",
