@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { User, Mail, Phone, FileText, Home } from 'lucide-react';
+import { User, Mail, Phone, FileText, Home, Eye, Edit, Trash2 } from 'lucide-react';
 
 interface ResidentCardProps {
   resident: any;
