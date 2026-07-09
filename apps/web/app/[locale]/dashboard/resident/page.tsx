@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Home, CreditCard, Wrench, Calendar, Bell, LogOut, Menu, X, FileText, User } from 'lucide-react';
 
