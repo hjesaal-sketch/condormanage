@@ -40,7 +40,8 @@
       "completed": "Completed",
       "cancelled": "Cancelled",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "paid": "Paid"
     },
     "priority": {
       "low": "Low",

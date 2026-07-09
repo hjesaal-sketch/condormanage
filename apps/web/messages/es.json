@@ -75,7 +75,8 @@
       "completed": "Completado",
       "cancelled": "Cancelado",
       "active": "Activo",
-      "inactive": "Inactivo"
+      "inactive": "Inactivo",
+      "paid": "Pagada"
     },
     "priority": {
       "low": "Baja",
