@@ -145,13 +145,13 @@ export default function ResidentDashboardPage() {
                 <InvoiceItem 
                   concept={t('maintenance_fee')} 
                   amount="$150.000" 
-                  status={t('status.pending')} 
+                  status={commonT('status.pending')} 
                   date="15/06/2026" 
                 />
                 <InvoiceItem 
                   concept={t('maintenance_fee')} 
                   amount="$150.000" 
-                  status={t('status.paid')} 
+                  status={commonT('status.paid')} 
                   date="15/05/2026" 
                 />
               </div>
