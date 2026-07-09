@@ -5,11 +5,11 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ClipboardList, Wrench, CheckCircle, Clock, AlertCircle, Bell, LogOut, Menu, X, Home } from 'lucide-react';
 
-export default function AdminDashboardPage() {
+export default function StaffDashboardPage() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'es';
-  const t = useTranslations('dashboard.admin');
+  const t = useTranslations('dashboard.staff');
   const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);

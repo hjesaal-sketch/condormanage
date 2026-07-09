@@ -5,11 +5,11 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Home, CreditCard, Wrench, Calendar, Bell, LogOut, Menu, X, FileText, User } from 'lucide-react';
 
-export default function AdminDashboardPage() {
+export default function ResidentDashboardPage() {
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'es';
-  const t = useTranslations('dashboard.admin');
+  const t = useTranslations('dashboard.resident');
   const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -65,11 +65,11 @@ export default function AdminDashboardPage() {
         <div className="flex-1 overflow-y-auto p-6">
           <nav className="space-y-1">
             <SidebarItem icon={Home} label={t('title')} active />
-            <SidebarItem icon={User} label={t('my_unit')} />
-            <SidebarItem icon={CreditCard} label={t('my_invoices')} />
+            <SidebarItem icon={User} label={commonT('my_unit')} />
+            <SidebarItem icon={CreditCard} label={commonT('my_invoices')} />
             <SidebarItem icon={Wrench} label={t('maintenance')} />
-            <SidebarItem icon={Calendar} label={t('reservations')} />
-            <SidebarItem icon={FileText} label={t('documents')} />
+            <SidebarItem icon={Calendar} label={commonT('reservations')} />
+            <SidebarItem icon={FileText} label={commonT('documents')} />
             <div className="pt-6 mt-6 border-t border-gray-100">
               <button
                 onClick={handleLogout}
