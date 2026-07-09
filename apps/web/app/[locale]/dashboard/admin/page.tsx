@@ -170,6 +170,7 @@ function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: a
   return (
     <nav className="space-y-1">
       <SidebarItem icon={LayoutDashboard} label={t('title')} active />
+      <SidebarItem icon={Building2} label={commonT('units')} />
       <SidebarItem icon={Building2} label={t('properties')} />
       <SidebarItem icon={Users} label={t('residents')} />
       <SidebarItem icon={DollarSign} label={t('income')} />
