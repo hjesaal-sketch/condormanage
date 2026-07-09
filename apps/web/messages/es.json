@@ -176,5 +176,35 @@
       "security": "Seguridad",
       "emergency": "Emergencia"
     }
+  },
+  "units": {
+    "title": "Unidades",
+    "new_unit": "Nueva Unidad",
+    "edit_unit": "Editar Unidad",
+    "number": "Número",
+    "floor": "Piso",
+    "area": "Área (m²)",
+    "type": "Tipo",
+    "status": "Estado",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "parking_spaces": "Estacionamientos",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "confirm_delete": "¿Está seguro de eliminar esta unidad?",
+    "types": {
+      "APARTMENT": "Apartamento",
+      "PENTHOUSE": "Penthouse",
+      "COMMERCIAL": "Comercial",
+      "PARKING": "Estacionamiento",
+      "STORAGE": "Bodega"
+    },
+    "statuses": {
+      "AVAILABLE": "Disponible",
+      "OCCUPIED": "Ocupado",
+      "MAINTENANCE": "Mantenimiento",
+      "RENTED": "Alquilado"
+    }
   }
 }

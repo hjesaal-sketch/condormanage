@@ -206,5 +206,35 @@
       "security": "Security",
       "emergency": "Emergency"
     }
+  },
+  "units": {
+    "title": "Units",
+    "new_unit": "New Unit",
+    "edit_unit": "Edit Unit",
+    "number": "Number",
+    "floor": "Floor",
+    "area": "Area (sq ft)",
+    "type": "Type",
+    "status": "Status",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "parking_spaces": "Parking Spaces",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm_delete": "Are you sure you want to delete this unit?",
+    "types": {
+      "APARTMENT": "Apartment",
+      "PENTHOUSE": "Penthouse",
+      "COMMERCIAL": "Commercial",
+      "PARKING": "Parking",
+      "STORAGE": "Storage"
+    },
+    "statuses": {
+      "AVAILABLE": "Available",
+      "OCCUPIED": "Occupied",
+      "MAINTENANCE": "Maintenance",
+      "RENTED": "Rented"
+    }
   }
 }
