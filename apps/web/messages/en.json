@@ -236,5 +236,29 @@
       "MAINTENANCE": "Maintenance",
       "RENTED": "Rented"
     }
+  },
+  "residents": {
+    "title": "Residents",
+    "new": "New Resident",
+    "edit": "Edit Resident",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "document": "Document",
+    "unit": "Unit",
+    "relationship": "Relationship",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm_delete": "Are you sure you want to delete this resident?",
+    "assign_unit": "Assign Unit",
+    "select_resident": "Select resident",
+    "no_residents": "No residents",
+    "relationships": {
+      "OWNER": "Owner",
+      "TENANT": "Tenant",
+      "RESIDENT": "Resident",
+      "CO_OWNER": "Co-owner"
+    }
   }
 }

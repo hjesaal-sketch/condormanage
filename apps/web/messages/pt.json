@@ -206,5 +206,29 @@
       "MAINTENANCE": "Manutenção",
       "RENTED": "Alugado"
     }
+  },
+  "residents": {
+    "title": "Residentes",
+    "new": "Novo Residente",
+    "edit": "Editar Residente",
+    "name": "Nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "document": "Documento",
+    "unit": "Unidade",
+    "relationship": "Relação",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza que deseja excluir este residente?",
+    "assign_unit": "Atribuir Unidade",
+    "select_resident": "Selecionar residente",
+    "no_residents": "Nenhum residente",
+    "relationships": {
+      "OWNER": "Proprietário",
+      "TENANT": "Inquilino",
+      "RESIDENT": "Morador",
+      "CO_OWNER": "Co-proprietário"
+    }
   }
 }
