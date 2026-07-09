@@ -19,42 +19,6 @@
     },
     "logout": "Sign Out"
   },
-  "dashboard": {
-    "admin": {
-      "title": "Administrative Dashboard",
-      "welcome": "Welcome back",
-      "properties": "Properties",
-      "residents": "Residents",
-      "income": "Income",
-      "maintenance": "Maintenance",
-      "recent_activity": "Recent Activity",
-      "quick_actions": "Quick Actions",
-      "generate_fees": "Generate Fees",
-      "register_payment": "Register Payment",
-      "create_ticket": "Create Ticket",
-      "reserve_area": "Reserve Area"
-    },
-    "resident": {
-      "title": "My Portal",
-      "welcome": "Welcome",
-      "pending_fees": "Pending Fees",
-      "active_tickets": "Active Tickets",
-      "reservations": "Reservations",
-      "my_unit": "My Unit",
-      "my_invoices": "My Invoices",
-      "maintenance": "Maintenance",
-      "documents": "Documents"
-    },
-    "staff": {
-      "title": "Maintenance Panel",
-      "welcome": "Welcome",
-      "pending": "Pending",
-      "in_progress": "In Progress",
-      "completed": "Completed",
-      "total": "Total",
-      "assigned_tickets": "Assigned Tickets"
-    }
-  },
   "common": {
     "loading": "Loading...",
     "save": "Save",
@@ -66,6 +30,10 @@
     "yes": "Yes",
     "no": "No",
     "actions": "Actions",
+    "logout": "Sign Out",
+    "reservations": "Reservations",
+    "documents": "Documents",
+    "settings": "Settings",
     "status": {
       "pending": "Pending",
       "in_progress": "In progress",
@@ -79,6 +47,71 @@
       "medium": "Medium",
       "high": "High",
       "urgent": "Urgent"
+    }
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Administrative Dashboard",
+      "welcome": "Welcome back",
+      "properties": "Properties",
+      "residents": "Residents",
+      "income": "Income",
+      "maintenance": "Maintenance",
+      "recent_activity": "Recent Activity",
+      "quick_actions": "Quick Actions",
+      "generate_fees": "Generate Fees",
+      "register_payment": "Register Payment",
+      "create_ticket": "Create Ticket",
+      "reserve_area": "Reserve Area",
+      "activity": {
+        "factura": "Invoice #001 created for Apartment 101",
+        "hace_2h": "2 hours ago",
+        "pago": "Payment of $150.000 registered",
+        "hace_4h": "4 hours ago",
+        "ticket": "Maintenance ticket #003 opened",
+        "hace_6h": "6 hours ago",
+        "residente": "New resident registered",
+        "hace_1d": "1 day ago"
+      }
+    },
+    "resident": {
+      "title": "My Portal",
+      "welcome": "Welcome",
+      "pending_fees": "Pending Fees",
+      "active_tickets": "Active Tickets",
+      "reservations": "Reservations",
+      "my_unit": "My Unit",
+      "my_invoices": "My Invoices",
+      "maintenance": "Maintenance",
+      "documents": "Documents",
+      "role": "Resident",
+      "total": "Total",
+      "in_review": "In review",
+      "next": "Next",
+      "common_area": "Common Area",
+      "last_invoices": "Recent Invoices",
+      "quick_actions": "Quick Actions",
+      "report_maintenance": "Report Maintenance",
+      "reserve_area": "Reserve Area",
+      "pay_fees": "Pay Fees",
+      "maintenance_fee": "Maintenance Fee"
+    },
+    "staff": {
+      "title": "Maintenance Panel",
+      "welcome": "Welcome",
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "total": "Total",
+      "assigned_tickets": "Assigned Tickets",
+      "role": "Staff",
+      "my_tickets": "My Tickets",
+      "tasks": "Tasks",
+      "history": "History",
+      "ticket_water": "Water leak in Apartment 101",
+      "ticket_lights": "Hallway lights not working",
+      "ticket_ac": "Air conditioning damaged",
+      "ticket_paint": "Facade painting"
     }
   },
   "units": {

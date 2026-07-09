@@ -66,6 +66,9 @@
     "yes": "Sim",
     "no": "Não",
     "actions": "Ações",
+    "reservations": "Reservas",
+    "documents": "Documentos",
+    "settings": "Configurações",
     "status": {
       "pending": "Pendente",
       "in_progress": "Em andamento",
