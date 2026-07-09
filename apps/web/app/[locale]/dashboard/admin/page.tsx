@@ -172,9 +172,9 @@ function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: a
       <SidebarItem icon={Users} label={t('residents')} />
       <SidebarItem icon={DollarSign} label={t('income')} />
       <SidebarItem icon={Wrench} label={t('maintenance')} />
-      <SidebarItem icon={Calendar} label="Reservas" />
-      <SidebarItem icon={FileText} label="Documentos" />
-      <SidebarItem icon={Settings} label="Configuración" />
+      <SidebarItem icon={Calendar} label={commonT('reservations')} />
+      <SidebarItem icon={FileText} label={commonT('documents')} />
+      <SidebarItem icon={Settings} label={commonT('settings')} />
       <div className="pt-6 mt-6 border-t border-gray-100">
         <button 
           onClick={handleLogout}
