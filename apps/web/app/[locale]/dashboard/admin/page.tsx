@@ -16,7 +16,9 @@ import {
   Bell,
   Menu,
   X,
-  LogOut
+  LogOut,
+  Server,
+  CreditCard
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -170,6 +172,8 @@ function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: a
       <SidebarItem icon={Building2} label={t('properties')} href="/dashboard/admin/properties" />
       <SidebarItem icon={Users} label={t('residents')} href="/dashboard/admin/residents" />
       <SidebarItem icon={DollarSign} label={t('income')} href="/dashboard/admin/billing" />
+      <SidebarItem icon={Server} label={commonT('services')} href="/dashboard/admin/services" />
+      <SidebarItem icon={CreditCard} label={commonT('expenses')} href="/dashboard/admin/expenses" />
       <SidebarItem icon={Wrench} label={t('maintenance')} href="/dashboard/admin/maintenance" />
       <SidebarItem icon={Calendar} label={commonT('reservations')} href="/dashboard/admin/reservations" />
       <SidebarItem icon={FileText} label={commonT('documents')} href="/dashboard/admin/documents" />
