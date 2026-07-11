@@ -82,7 +82,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl bg-white p-6 rounded-xl shadow-sm">
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">{t('number')}</label>
@@ -90,7 +90,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             type="text"
             value={formData.number}
             onChange={(e) => setFormData({ ...formData, number: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
@@ -100,7 +100,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             type="number"
             value={formData.floor}
             onChange={(e) => setFormData({ ...formData, floor: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
       </div>
@@ -113,7 +113,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             step="0.01"
             value={formData.area}
             onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div>
@@ -121,13 +121,13 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
           <select
             value={formData.type}
             onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="APARTMENT">{t('types.APARTMENT')}</option>
-            <option value="PENTHOUSE">{t('types.PENTHOUSE')}</option>
-            <option value="COMMERCIAL">{t('types.COMMERCIAL')}</option>
-            <option value="PARKING">{t('types.PARKING')}</option>
-            <option value="STORAGE">{t('types.STORAGE')}</option>
+            <option value="APARTMENT" className="text-gray-900">{t('types.APARTMENT')}</option>
+            <option value="PENTHOUSE" className="text-gray-900">{t('types.PENTHOUSE')}</option>
+            <option value="COMMERCIAL" className="text-gray-900">{t('types.COMMERCIAL')}</option>
+            <option value="PARKING" className="text-gray-900">{t('types.PARKING')}</option>
+            <option value="STORAGE" className="text-gray-900">{t('types.STORAGE')}</option>
           </select>
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             type="number"
             value={formData.bedrooms}
             onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div>
@@ -148,7 +148,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             type="number"
             value={formData.bathrooms}
             onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div>
@@ -157,7 +157,7 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             type="number"
             value={formData.parkingSpaces}
             onChange={(e) => setFormData({ ...formData, parkingSpaces: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             min="0"
           />
         </div>
@@ -168,12 +168,12 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
         <select
           value={formData.status}
           onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-          className="w-full border rounded-lg px-3 py-2"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
-          <option value="AVAILABLE">{t('statuses.AVAILABLE')}</option>
-          <option value="OCCUPIED">{t('statuses.OCCUPIED')}</option>
-          <option value="MAINTENANCE">{t('statuses.MAINTENANCE')}</option>
-          <option value="RENTED">{t('statuses.RENTED')}</option>
+          <option value="AVAILABLE" className="text-gray-900">{t('statuses.AVAILABLE')}</option>
+          <option value="OCCUPIED" className="text-gray-900">{t('statuses.OCCUPIED')}</option>
+          <option value="MAINTENANCE" className="text-gray-900">{t('statuses.MAINTENANCE')}</option>
+          <option value="RENTED" className="text-gray-900">{t('statuses.RENTED')}</option>
         </select>
       </div>
 

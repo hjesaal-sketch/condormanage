@@ -89,14 +89,14 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl bg-white p-6 rounded-xl shadow-sm">
       <div>
         <label className="block text-sm font-medium text-gray-700">{t('name')}</label>
         <input
           type="text"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full border rounded-lg px-3 py-2"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -107,7 +107,7 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full border rounded-lg px-3 py-2"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -119,7 +119,7 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
             type="text"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div>
@@ -128,7 +128,7 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
             type="text"
             value={formData.document}
             onChange={(e) => setFormData({ ...formData, document: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
       </div>
@@ -139,11 +139,11 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
           <select
             value={formData.unitId}
             onChange={(e) => setFormData({ ...formData, unitId: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="">Sin asignar</option>
+            <option value="" className="text-gray-900">Sin asignar</option>
             {units.map((unit: any) => (
-              <option key={unit.id} value={unit.id}>
+              <option key={unit.id} value={unit.id} className="text-gray-900">
                 {unit.number} - {unit.floor ? `Piso ${unit.floor}` : ''}
               </option>
             ))}
@@ -154,12 +154,12 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
           <select
             value={formData.relationship}
             onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="OWNER">{t('relationships.OWNER')}</option>
-            <option value="TENANT">{t('relationships.TENANT')}</option>
-            <option value="RESIDENT">{t('relationships.RESIDENT')}</option>
-            <option value="CO_OWNER">{t('relationships.CO_OWNER')}</option>
+            <option value="OWNER" className="text-gray-900">{t('relationships.OWNER')}</option>
+            <option value="TENANT" className="text-gray-900">{t('relationships.TENANT')}</option>
+            <option value="RESIDENT" className="text-gray-900">{t('relationships.RESIDENT')}</option>
+            <option value="CO_OWNER" className="text-gray-900">{t('relationships.CO_OWNER')}</option>
           </select>
         </div>
       </div>
