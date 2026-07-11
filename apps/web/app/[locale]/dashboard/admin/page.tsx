@@ -83,7 +83,7 @@ export default function AdminDashboardPage() {
               <X className="w-6 h-6 text-gray-500" />
             </button>
           </div>
-          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} />
+          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} locale={locale} />
         </div>
       </div>
 
@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
           <span className="text-xl font-bold text-gray-800">CondorManage</span>
         </div>
         <div className="flex-1 overflow-y-auto p-6">
-          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} />
+          <SidebarContent t={t} commonT={commonT} user={user} handleLogout={handleLogout} locale={locale} />
         </div>
       </div>
 
@@ -164,20 +164,20 @@ export default function AdminDashboardPage() {
   );
 }
 
-function SidebarContent({ t, commonT, user, handleLogout }: { t: any; commonT: any; user: any; handleLogout: () => void }) {
+function SidebarContent({ t, commonT, user, handleLogout, locale }: { t: any; commonT: any; user: any; handleLogout: () => void; locale: string }) {
   return (
     <nav className="space-y-1">
-      <SidebarItem icon={LayoutDashboard} label={t('title')} href="/dashboard/admin" active />
-      <SidebarItem icon={Building2} label={commonT('units')} href="/dashboard/admin/units" />
-      <SidebarItem icon={Building2} label={t('properties')} href="/dashboard/admin/properties" />
-      <SidebarItem icon={Users} label={t('residents')} href="/dashboard/admin/residents" />
-      <SidebarItem icon={DollarSign} label={t('income')} href="/dashboard/admin/billing" />
-      <SidebarItem icon={Server} label={commonT('services')} href="/dashboard/admin/services" />
-      <SidebarItem icon={CreditCard} label={commonT('expenses')} href="/dashboard/admin/expenses" />
-      <SidebarItem icon={Wrench} label={t('maintenance')} href="/dashboard/admin/maintenance" />
-      <SidebarItem icon={Calendar} label={commonT('reservations')} href="/dashboard/admin/reservations" />
-      <SidebarItem icon={FileText} label={commonT('documents')} href="/dashboard/admin/documents" />
-      <SidebarItem icon={Settings} label={commonT('settings')} href="/dashboard/admin/settings" />
+      <SidebarItem icon={LayoutDashboard} label={t('title')} href={`/${locale}/dashboard/admin`} active />
+      <SidebarItem icon={Building2} label={commonT('units')} href={`/${locale}/dashboard/admin/units`} />
+      <SidebarItem icon={Building2} label={t('properties')} href={`/${locale}/dashboard/admin/properties`} />
+      <SidebarItem icon={Users} label={t('residents')} href={`/${locale}/dashboard/admin/residents`} />
+      <SidebarItem icon={DollarSign} label={t('income')} href={`/${locale}/dashboard/admin/billing`} />
+      <SidebarItem icon={Server} label={commonT('services')} href={`/${locale}/dashboard/admin/services`} />
+      <SidebarItem icon={CreditCard} label={commonT('expenses')} href={`/${locale}/dashboard/admin/expenses`} />
+      <SidebarItem icon={Wrench} label={t('maintenance')} href={`/${locale}/dashboard/admin/maintenance`} />
+      <SidebarItem icon={Calendar} label={commonT('reservations')} href={`/${locale}/dashboard/admin/reservations`} />
+      <SidebarItem icon={FileText} label={commonT('documents')} href={`/${locale}/dashboard/admin/documents`} />
+      <SidebarItem icon={Settings} label={commonT('settings')} href={`/${locale}/dashboard/admin/settings`} />
       <div className="pt-6 mt-6 border-t border-gray-100">
         <button 
           onClick={handleLogout}
