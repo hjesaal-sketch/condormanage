@@ -154,7 +154,7 @@
     "loading_rate": "Carregando taxa de câmbio...",
     "exchange_rate": "Taxa de câmbio",
     "updated": "Atualizado",
-    "status": {
+    "statuses": {
       "all": "Todos",
       "pending": "Pendente",
       "paid": "Pago",

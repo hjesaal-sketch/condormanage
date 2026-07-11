@@ -183,7 +183,7 @@
     "loading_rate": "Loading exchange rate...",
     "exchange_rate": "Exchange rate",
     "updated": "Updated",
-    "status": {
+    "statuses": {
       "all": "All",
       "pending": "Pending",
       "paid": "Paid",

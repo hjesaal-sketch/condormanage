@@ -50,7 +50,7 @@ export default function InvoiceList({ invoices, loading }: InvoiceListProps) {
                   invoice.status === 'CANCELLED' ? 'bg-gray-100 text-gray-800' :
                   'bg-yellow-100 text-yellow-800'
                 }`}>
-                  {t(`status.${invoice.status.toLowerCase()}`)}
+                  {t(`statuses.${invoice.status.toLowerCase()}`)}
                 </span>
               </td>
               <td className="px-4 py-3 text-right">

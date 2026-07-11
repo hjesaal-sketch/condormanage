@@ -119,7 +119,8 @@
       "maintenance": "Mantenimiento",
       "rented": "Alquilado"
     }
-  },  "billing": {
+  },  
+  "billing": {
     "title": "Facturación",
     "generate_fees": "Generar Cuotas",
     "generate_fees_description": "Genera cuotas de mantenimiento para todas las unidades o una específica",
@@ -162,7 +163,7 @@
     "loading_rate": "Cargando tasa de cambio...",
     "exchange_rate": "Tasa de cambio",
     "updated": "Actualizado",
-    "status": {
+    "statuses": {
       "all": "Todos",
       "pending": "Pendiente",
       "paid": "Pagada",
