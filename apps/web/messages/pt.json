@@ -19,42 +19,6 @@
     },
     "logout": "Sair"
   },
-  "dashboard": {
-    "admin": {
-      "title": "Painel Administrativo",
-      "welcome": "Bem-vindo de volta",
-      "properties": "Propriedades",
-      "residents": "Residentes",
-      "income": "Receitas",
-      "maintenance": "Manutenção",
-      "recent_activity": "Atividade Recente",
-      "quick_actions": "Ações Rápidas",
-      "generate_fees": "Gerar Taxas",
-      "register_payment": "Registrar Pagamento",
-      "create_ticket": "Criar Chamado",
-      "reserve_area": "Reservar Área"
-    },
-    "resident": {
-      "title": "Meu Portal",
-      "welcome": "Bem-vindo",
-      "pending_fees": "Taxas Pendentes",
-      "active_tickets": "Chamados Ativos",
-      "reservations": "Reservas",
-      "my_unit": "Minha Unidade",
-      "my_invoices": "Minhas Faturas",
-      "maintenance": "Manutenção",
-      "documents": "Documentos"
-    },
-    "staff": {
-      "title": "Painel de Manutenção",
-      "welcome": "Bem-vindo",
-      "pending": "Pendentes",
-      "in_progress": "Em Andamento",
-      "completed": "Concluídos",
-      "total": "Total",
-      "assigned_tickets": "Chamados Atribuídos"
-    }
-  },
   "common": {
     "loading": "Carregando...",
     "save": "Salvar",
@@ -85,6 +49,71 @@
       "medium": "Média",
       "high": "Alta",
       "urgent": "Urgente"
+    }
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Painel Administrativo",
+      "welcome": "Bem-vindo de volta",
+      "properties": "Propriedades",
+      "residents": "Moradores",
+      "income": "Receitas",
+      "maintenance": "Manutenção",
+      "recent_activity": "Atividade Recente",
+      "quick_actions": "Ações Rápidas",
+      "generate_fees": "Gerar Taxas",
+      "register_payment": "Registrar Pagamento",
+      "create_ticket": "Criar Chamado",
+      "reserve_area": "Reservar Área",
+      "activity": {
+        "factura": "Fatura #001 criada para Apartamento 101",
+        "hace_2h": "Há 2 horas",
+        "pago": "Pagamento de $150.000 registrado",
+        "hace_4h": "Há 4 horas",
+        "ticket": "Chamado de manutenção #003 aberto",
+        "hace_6h": "Há 6 horas",
+        "residente": "Novo morador registrado",
+        "hace_1d": "Há 1 dia"
+      }
+    },
+    "resident": {
+      "title": "Meu Portal",
+      "welcome": "Bem-vindo",
+      "pending_fees": "Taxas Pendentes",
+      "active_tickets": "Chamados Ativos",
+      "reservations": "Reservas",
+      "my_unit": "Minha Unidade",
+      "my_invoices": "Minhas Faturas",
+      "maintenance": "Manutenção",
+      "documents": "Documentos",
+      "role": "Morador",
+      "total": "Total",
+      "in_review": "Em revisão",
+      "next": "Próxima",
+      "common_area": "Área Comum",
+      "last_invoices": "Últimas Faturas",
+      "quick_actions": "Ações Rápidas",
+      "report_maintenance": "Reportar Manutenção",
+      "reserve_area": "Reservar Área",
+      "pay_fees": "Pagar Taxas",
+      "maintenance_fee": "Taxa de Manutenção"
+    },
+    "staff": {
+      "title": "Painel de Manutenção",
+      "welcome": "Bem-vindo",
+      "pending": "Pendentes",
+      "in_progress": "Em Andamento",
+      "completed": "Concluídos",
+      "total": "Total",
+      "assigned_tickets": "Chamados Atribuídos",
+      "role": "Equipe",
+      "my_tickets": "Meus Chamados",
+      "tasks": "Tarefas",
+      "history": "Histórico",
+      "ticket_water": "Vazamento de água no Apartamento 101",
+      "ticket_lights": "Luzes do corredor não funcionam",
+      "ticket_ac": "Ar condicionado danificado",
+      "ticket_paint": "Pintura da fachada"
     }
   },
   "units": {
@@ -246,9 +275,9 @@
     }
   },
   "residents": {
-    "title": "Residentes",
-    "new": "Novo Residente",
-    "edit": "Editar Residente",
+    "title": "Moradores",
+    "new": "Novo Morador",
+    "edit": "Editar Morador",
     "name": "Nome",
     "email": "E-mail",
     "phone": "Telefone",
@@ -258,15 +287,64 @@
     "save": "Salvar",
     "cancel": "Cancelar",
     "delete": "Excluir",
-    "confirm_delete": "Tem certeza que deseja excluir este residente?",
+    "confirm_delete": "Tem certeza que deseja excluir este morador?",
     "assign_unit": "Atribuir Unidade",
-    "select_resident": "Selecionar residente",
-    "no_residents": "Nenhum residente",
+    "select_resident": "Selecionar morador",
+    "no_residents": "Nenhum morador",
     "relationships": {
       "OWNER": "Proprietário",
       "TENANT": "Inquilino",
       "RESIDENT": "Morador",
       "CO_OWNER": "Co-proprietário"
     }
+  },
+  "services": {
+    "title": "Serviços",
+    "new": "Novo Serviço",
+    "edit": "Editar Serviço",
+    "name": "Nome",
+    "description": "Descrição",
+    "type": "Tipo",
+    "is_active": "Ativo",
+    "types": {
+      "UTILITY": "Serviço Público",
+      "FIXED": "Custo Fixo",
+      "PERSONNEL": "Pessoal"
+    },
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza que deseja excluir este serviço?",
+    "no_services": "Nenhum serviço"
+  },
+  "expenses": {
+    "title": "Despesas",
+    "new": "Nova Despesa",
+    "edit": "Editar Despesa",
+    "category": "Categoria",
+    "description": "Descrição",
+    "amount": "Valor",
+    "date": "Data",
+    "status": "Status",
+    "notes": "Notas",
+    "categories": {
+      "MAINTENANCE": "Manutenção",
+      "REPAIR": "Reparo",
+      "EMERGENCY": "Emergência",
+      "SECURITY": "Segurança",
+      "CLEANING": "Limpeza",
+      "OTHER": "Outro"
+    },
+    "statuses": {
+      "PENDING": "Pendente",
+      "APPROVED": "Aprovado",
+      "REJECTED": "Rejeitado",
+      "PAID": "Pago"
+    },
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza que deseja excluir esta despesa?",
+    "no_expenses": "Nenhuma despesa"
   }
 }

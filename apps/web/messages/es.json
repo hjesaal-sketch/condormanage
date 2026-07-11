@@ -16,6 +16,39 @@
         "required": "Email y contraseña son requeridos",
         "server": "Error en el servidor"
       }
+    },
+    "logout": "Cerrar Sesión"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "back": "Volver",
+    "yes": "Sí",
+    "no": "No",
+    "actions": "Acciones",
+    "logout": "Cerrar Sesión",
+    "units": "Unidades",
+    "reservations": "Reservas",
+    "documents": "Documentos",
+    "settings": "Configuración",
+    "status": {
+      "pending": "Pendiente",
+      "in_progress": "En progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "paid": "Pagada"
+    },
+    "priority": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
     }
   },
   "dashboard": {
@@ -52,7 +85,18 @@
       "my_unit": "Mi Unidad",
       "my_invoices": "Mis Facturas",
       "maintenance": "Mantenimiento",
-      "documents": "Documentos"
+      "documents": "Documentos",
+      "role": "Residente",
+      "total": "Total",
+      "in_review": "En revisión",
+      "next": "Próxima",
+      "common_area": "Área Común",
+      "last_invoices": "Últimas Facturas",
+      "quick_actions": "Acciones Rápidas",
+      "report_maintenance": "Reportar Mantenimiento",
+      "reserve_area": "Reservar Área",
+      "pay_fees": "Pagar Cuotas",
+      "maintenance_fee": "Cuota de Mantenimiento"
     },
     "staff": {
       "title": "Panel de Mantenimiento",
@@ -61,39 +105,15 @@
       "in_progress": "En Progreso",
       "completed": "Completados",
       "total": "Total",
-      "assigned_tickets": "Tickets Asignados"
-    }
-  },
-  "common": {
-    "loading": "Cargando...",
-    "save": "Guardar",
-    "cancel": "Cancelar",
-    "edit": "Editar",
-    "delete": "Eliminar",
-    "close": "Cerrar",
-    "back": "Volver",
-    "yes": "Sí",
-    "no": "No",
-    "actions": "Acciones",
-    "logout": "Cerrar Sesión",
-    "units": "Unidades",
-    "reservations": "Reservas",
-    "documents": "Documentos",
-    "settings": "Configuración",
-    "status": {
-      "pending": "Pendiente",
-      "in_progress": "En progreso",
-      "completed": "Completado",
-      "cancelled": "Cancelado",
-      "active": "Activo",
-      "inactive": "Inactivo",
-      "paid": "Pagada"
-    },
-    "priority": {
-      "low": "Baja",
-      "medium": "Media",
-      "high": "Alta",
-      "urgent": "Urgente"
+      "assigned_tickets": "Tickets Asignados",
+      "role": "Staff",
+      "my_tickets": "Mis Tickets",
+      "tasks": "Tareas",
+      "history": "Historial",
+      "ticket_water": "Fuga de agua en Apartamento 101",
+      "ticket_lights": "Luces del pasillo no funcionan",
+      "ticket_ac": "Aire acondicionado dañado",
+      "ticket_paint": "Pintura de fachada"
     }
   },
   "units": {
@@ -119,7 +139,7 @@
       "maintenance": "Mantenimiento",
       "rented": "Alquilado"
     }
-  },  
+  },
   "billing": {
     "title": "Facturación",
     "generate_fees": "Generar Cuotas",
@@ -277,5 +297,54 @@
       "RESIDENT": "Residente",
       "CO_OWNER": "Co-propietario"
     }
+  },
+  "services": {
+    "title": "Servicios",
+    "new": "Nuevo Servicio",
+    "edit": "Editar Servicio",
+    "name": "Nombre",
+    "description": "Descripción",
+    "type": "Tipo",
+    "is_active": "Activo",
+    "types": {
+      "UTILITY": "Servicio Público",
+      "FIXED": "Costo Fijo",
+      "PERSONNEL": "Personal"
+    },
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "confirm_delete": "¿Está seguro de eliminar este servicio?",
+    "no_services": "No hay servicios"
+  },
+  "expenses": {
+    "title": "Gastos",
+    "new": "Nuevo Gasto",
+    "edit": "Editar Gasto",
+    "category": "Categoría",
+    "description": "Descripción",
+    "amount": "Monto",
+    "date": "Fecha",
+    "status": "Estado",
+    "notes": "Notas",
+    "categories": {
+      "MAINTENANCE": "Mantenimiento",
+      "REPAIR": "Reparación",
+      "EMERGENCY": "Emergencia",
+      "SECURITY": "Seguridad",
+      "CLEANING": "Limpieza",
+      "OTHER": "Otro"
+    },
+    "statuses": {
+      "PENDING": "Pendiente",
+      "APPROVED": "Aprobado",
+      "REJECTED": "Rechazado",
+      "PAID": "Pagado"
+    },
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "confirm_delete": "¿Está seguro de eliminar este gasto?",
+    "no_expenses": "No hay gastos"
   }
 }
