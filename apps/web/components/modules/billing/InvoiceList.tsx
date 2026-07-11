@@ -44,10 +44,11 @@ export default function InvoiceList({ invoices, loading }: InvoiceListProps) {
               <td className="px-4 py-3">{new Date(invoice.due_date).toLocaleDateString()}</td>
               <td className="px-4 py-3">${invoice.amount.toFixed(2)}</td>
               <td className="px-4 py-3">
-                <span className={`px-2 py-1 rounded-full text-xs ${
-                  invoice.status === 'PAID' ? 'bg-green-100 text-green-700' :
-                  invoice.status === 'OVERDUE' ? 'bg-red-100 text-red-700' :
-                  'bg-yellow-100 text-yellow-700'
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  invoice.status === 'PAID' ? 'bg-green-100 text-green-800' :
+                  invoice.status === 'OVERDUE' ? 'bg-red-100 text-red-800' :
+                  invoice.status === 'CANCELLED' ? 'bg-gray-100 text-gray-800' :
+                  'bg-yellow-100 text-yellow-800'
                 }`}>
                   {t(`status.${invoice.status.toLowerCase()}`)}
                 </span>
