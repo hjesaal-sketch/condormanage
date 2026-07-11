@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +20,7 @@ export default function ServiceForm({ serviceId, initialData }: ServiceFormProps
     isActive: true,
   });
 
-  useState(() => {
+  useEffect(() => {
     if (initialData) {
       setFormData({
         name: initialData.name || '',
