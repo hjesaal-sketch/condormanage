@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -22,7 +22,7 @@ export default function ExpenseForm({ expenseId, initialData }: ExpenseFormProps
     notes: '',
   });
 
-  useState(() => {
+  useEffect(() => {
     if (initialData) {
       setFormData({
         category: initialData.category || 'MAINTENANCE',
