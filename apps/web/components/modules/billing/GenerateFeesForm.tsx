@@ -70,26 +70,26 @@ export default function GenerateFeesForm() {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl bg-white p-6 rounded-xl shadow-sm">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-800">{t('month')}</label>
+          <label className="block text-sm font-medium text-gray-700">{t('month')}</label>
           <select
             value={formData.month}
             onChange={(e) => setFormData({ ...formData, month: parseInt(e.target.value) })}
-            className="w-full border rounded-lg px-3 py-2 text-gray-800 bg-white"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
-              <option key={m} value={m} className="text-gray-800">
+              <option key={m} value={m} className="text-gray-900">
                 {new Date(2024, m - 1).toLocaleString('default', { month: 'long' })}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-800">{t('year')}</label>
+          <label className="block text-sm font-medium text-gray-700">{t('year')}</label>
           <input
             type="number"
             value={formData.year}
             onChange={(e) => setFormData({ ...formData, year: parseInt(e.target.value) })}
-            className="w-full border rounded-lg px-3 py-2 text-gray-800 bg-white"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             min="2020"
             max="2030"
           />
@@ -97,30 +97,30 @@ export default function GenerateFeesForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-800">{t('amount')}</label>
+        <label className="block text-sm font-medium text-gray-700">{t('amount')}</label>
         <input
           type="number"
           step="0.01"
           value={formData.amount}
           onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
-          className="w-full border rounded-lg px-3 py-2 text-gray-800 bg-white"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-800">{t('concept')}</label>
+        <label className="block text-sm font-medium text-gray-700">{t('concept')}</label>
         <input
           type="text"
           value={formData.concept}
           onChange={(e) => setFormData({ ...formData, concept: e.target.value })}
-          className="w-full border rounded-lg px-3 py-2 text-gray-800 bg-white"
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder={t('concept_placeholder')}
         />
       </div>
 
       <div>
-        <label className="flex items-center gap-2 text-gray-800">
+        <label className="flex items-center gap-2 text-gray-700">
           <input
             type="checkbox"
             checked={formData.applyToAll}
@@ -133,15 +133,15 @@ export default function GenerateFeesForm() {
 
       {!formData.applyToAll && (
         <div>
-          <label className="block text-sm font-medium text-gray-800">{t('unit')}</label>
+          <label className="block text-sm font-medium text-gray-700">{t('unit')}</label>
           <select
             value={formData.unitId}
             onChange={(e) => setFormData({ ...formData, unitId: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-gray-800 bg-white"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="" className="text-gray-800">{t('select_unit')}</option>
+            <option value="" className="text-gray-900">{t('select_unit')}</option>
             {units.map((unit) => (
-              <option key={unit.id} value={unit.id} className="text-gray-800">
+              <option key={unit.id} value={unit.id} className="text-gray-900">
                 {unit.number}
               </option>
             ))}
