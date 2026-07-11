@@ -14,7 +14,7 @@ export default function InvoiceList({ invoices, loading }: InvoiceListProps) {
   const t = useTranslations('billing');
 
   if (loading) {
-    return <div className="text-center py-8">{t('loading')}</div>;
+    return <div className="text-center py-8 text-gray-600">{t('loading')}</div>;
   }
 
   if (invoices.length === 0) {
@@ -38,11 +38,11 @@ export default function InvoiceList({ invoices, loading }: InvoiceListProps) {
         <tbody>
           {invoices.map((invoice: any) => (
             <tr key={invoice.id} className="border-t hover:bg-gray-50">
-              <td className="px-4 py-3">{invoice.number}</td>
-              <td className="px-4 py-3">{invoice.unit?.number || '-'}</td>
-              <td className="px-4 py-3">{new Date(invoice.issue_date).toLocaleDateString()}</td>
-              <td className="px-4 py-3">{new Date(invoice.due_date).toLocaleDateString()}</td>
-              <td className="px-4 py-3">${invoice.amount.toFixed(2)}</td>
+              <td className="px-4 py-3 text-gray-800">{invoice.number}</td>
+              <td className="px-4 py-3 text-gray-800">{invoice.unit?.number || '-'}</td>
+              <td className="px-4 py-3 text-gray-800">{new Date(invoice.issue_date).toLocaleDateString()}</td>
+              <td className="px-4 py-3 text-gray-800">{new Date(invoice.due_date).toLocaleDateString()}</td>
+              <td className="px-4 py-3 text-gray-800 font-medium">${invoice.amount.toFixed(2)}</td>
               <td className="px-4 py-3">
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   invoice.status === 'PAID' ? 'bg-green-100 text-green-800' :
