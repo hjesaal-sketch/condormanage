@@ -32,6 +32,8 @@
     "actions": "Actions",
     "logout": "Sign Out",
     "units": "Units",
+    "services": "Services",
+    "expenses": "Expenses",
     "reservations": "Reservations",
     "documents": "Documents",
     "settings": "Settings",
