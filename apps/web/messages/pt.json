@@ -303,6 +303,7 @@
   "services": {
     "title": "Serviços",
     "new": "Novo Serviço",
+    "actions": "Ações",
     "edit": "Editar Serviço",
     "name": "Nome",
     "description": "Descrição",
