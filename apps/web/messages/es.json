@@ -125,6 +125,7 @@
     "generate_fees_description": "Genera cuotas de mantenimiento para todas las unidades o una específica",
     "register_payment": "Registrar Pago",
     "register_payment_description": "Registra el pago de una factura",
+    "status": "Estado",
     "invoice": "Factura",
     "payment": "Pago",
     "number": "Número",

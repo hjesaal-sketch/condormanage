@@ -146,6 +146,7 @@
     "generate_fees_description": "Generate maintenance fees for all units or a specific one",
     "register_payment": "Register Payment",
     "register_payment_description": "Register a payment for an invoice",
+    "status": "Status",
     "invoice": "Invoice",
     "payment": "Payment",
     "number": "Number",
