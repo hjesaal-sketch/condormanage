@@ -169,7 +169,6 @@ function SidebarContent({ t, commonT, user, handleLogout, locale }: { t: any; co
     <nav className="space-y-1">
       <SidebarItem icon={LayoutDashboard} label={t('title')} href={`/${locale}/dashboard/admin`} active />
       <SidebarItem icon={Building2} label={commonT('units')} href={`/${locale}/dashboard/admin/units`} />
-      <SidebarItem icon={Building2} label={t('properties')} href={`/${locale}/dashboard/admin/properties`} />
       <SidebarItem icon={Users} label={t('residents')} href={`/${locale}/dashboard/admin/residents`} />
       <SidebarItem icon={DollarSign} label={t('income')} href={`/${locale}/dashboard/admin/billing`} />
       <SidebarItem icon={Server} label={commonT('services')} href={`/${locale}/dashboard/admin/services`} />
