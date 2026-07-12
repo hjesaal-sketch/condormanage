@@ -141,7 +141,7 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
             onChange={(e) => setFormData({ ...formData, unitId: e.target.value })}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="" className="text-gray-900">Sin asignar</option>
+            <option value="" className="text-gray-900">{t('unassigned')}</option>
             {units.map((unit: any) => (
               <option key={unit.id} value={unit.id} className="text-gray-900">
                 {unit.number} - {unit.floor ? `Piso ${unit.floor}` : ''}
@@ -170,7 +170,7 @@ export default function ResidentForm({ residentId, initialData }: ResidentFormPr
           disabled={loading}
           className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 disabled:opacity-50"
         >
-          {loading ? 'Guardando...' : t('save')}
+          {loading ? t('saving') : t('save')}
         </button>
         <button
           type="button"

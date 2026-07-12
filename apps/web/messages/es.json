@@ -294,6 +294,7 @@
     "actions": "Acciones",
     "loading": "Cargando...",
     "unassigned": "Sin asignar",
+    "saving": "Guardando...",
     "form_description": "Complete los campos para registrar un nuevo residente",
     "relationship": "Relación",
     "save": "Guardar",
