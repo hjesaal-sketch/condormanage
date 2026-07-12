@@ -107,8 +107,8 @@ export default function ServiceForm({ serviceId, initialData }: ServiceFormProps
             onChange={(e) => setFormData({ ...formData, isActive: e.target.value === 'true' })}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
           >
-            <option value="true">Activo</option>
-            <option value="false">Inactivo</option>
+            <option value="true">{t('active')}</option>
+            <option value="false">{t('inactive')}</option>
           </select>
         </div>
       </div>
@@ -119,7 +119,7 @@ export default function ServiceForm({ serviceId, initialData }: ServiceFormProps
           disabled={loading}
           className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700"
         >
-          {loading ? 'Guardando...' : t('save')}
+          {loading ? t('saving') : t('save')}
         </button>
         <button
           type="button"

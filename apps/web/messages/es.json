@@ -319,6 +319,10 @@
     "name": "Nombre",
     "description": "Descripción",
     "type": "Tipo",
+    "form_description": "Complete los campos para registrar un nuevo servicio",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "saving": "Guardando...",
     "is_active": "Activo",
     "types": {
       "UTILITY": "Servicio Público",

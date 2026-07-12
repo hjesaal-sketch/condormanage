@@ -319,6 +319,10 @@
     "name": "Name",
     "description": "Description",
     "type": "Type",
+    "form_description": "Complete the fields to register a new service",
+    "active": "Active",
+    "inactive": "Inactive",
+    "saving": "Saving...",
     "is_active": "Active",
     "types": {
       "UTILITY": "Utility",

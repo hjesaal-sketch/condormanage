@@ -10,7 +10,7 @@ export default function NewServicePage() {
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">{t('new')}</h1>
-        <p className="text-gray-500">Complete los campos para registrar un nuevo servicio</p>
+        <p className="text-gray-500">{t('form_description')}</p>
       </div>
       <ServiceForm />
     </div>
