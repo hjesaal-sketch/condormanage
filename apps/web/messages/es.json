@@ -218,6 +218,7 @@
     "confirm_delete": "¿Está seguro de eliminar este ticket?",
     "no_tickets": "No hay tickets",
     "loading": "Cargando...",
+    "form_description": "Complete los campos para registrar un nuevo ticket de mantenimiento",
     "actions": "Acciones",
     "select_unit": "Seleccionar unidad",
     "unassigned": "Sin asignar",

@@ -218,6 +218,7 @@
     "confirm_delete": "Tem certeza que deseja excluir este chamado?",
     "no_tickets": "Nenhum chamado",
     "loading": "Carregando...",
+    "form_description": "Preencha os campos para registrar um novo chamado de manutenção",
     "actions": "Ações",
     "select_unit": "Selecionar unidade",
     "unassigned": "Não atribuído",
