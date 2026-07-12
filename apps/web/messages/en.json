@@ -262,6 +262,7 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "confirm_delete": "Are you sure you want to delete this unit?",
+    "form_description": "Complete the fields to register a new unit",
     "types": {
       "APARTMENT": "Apartment",
       "PENTHOUSE": "Penthouse",

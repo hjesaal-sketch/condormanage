@@ -262,6 +262,7 @@
     "cancel": "Cancelar",
     "delete": "Excluir",
     "confirm_delete": "Tem certeza que deseja excluir esta unidade?",
+    "form_description": "Preencha os campos para registrar uma nova unidade",
     "types": {
       "APARTMENT": "Apartamento",
       "PENTHOUSE": "Cobertura",

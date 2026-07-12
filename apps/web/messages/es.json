@@ -262,6 +262,7 @@
     "cancel": "Cancelar",
     "delete": "Eliminar",
     "confirm_delete": "¿Está seguro de eliminar esta unidad?",
+    "form_description": "Complete los campos para registrar una nueva unidad",
     "types": {
       "APARTMENT": "Apartamento",
       "PENTHOUSE": "Penthouse",
