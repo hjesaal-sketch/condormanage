@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Plus, Eye, Edit, Trash2, Search, Filter } from 'lucide-react';
 import InvoiceList from '@/components/modules/billing/InvoiceList';
 
 export default function BillingPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'es';
   const t = useTranslations('billing');
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ export default function BillingPage() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">{t('title')}</h1>
         <button
-          onClick={() => router.push('/dashboard/admin/billing/new')}
+          onClick={() => router.push(`/${locale}/dashboard/admin/billing/new`)}
           className="bg-blue-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700"
         >
           <Plus className="w-4 h-4" />

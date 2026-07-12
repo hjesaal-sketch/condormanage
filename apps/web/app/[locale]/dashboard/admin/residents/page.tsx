@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Plus, Edit, Trash2, Eye, Search, User } from 'lucide-react';
 
 export default function ResidentsPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'es';
   const t = useTranslations('residents');
   const [residents, setResidents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +53,7 @@ export default function ResidentsPage() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">{t('title')}</h1>
         <button
-          onClick={() => router.push('/dashboard/admin/residents/new')}
+          onClick={() => router.push(`/${locale}/dashboard/admin/residents/new`)}
           className="bg-blue-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700"
         >
           <Plus className="w-4 h-4" />
@@ -112,13 +114,13 @@ export default function ResidentsPage() {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <button
-                      onClick={() => router.push(`/dashboard/admin/residents/${resident.id}`)}
+                      onClick={() => router.push(`/${locale}/dashboard/admin/residents/${resident.id}`)}
                       className="text-blue-600 hover:text-blue-800 mr-2"
                     >
                       <Eye className="w-4 h-4 inline" />
                     </button>
                     <button
-                      onClick={() => router.push(`/dashboard/admin/residents/${resident.id}/edit`)}
+                      onClick={() => router.push(`/${locale}/dashboard/admin/residents/${resident.id}/edit`)}
                       className="text-gray-600 hover:text-gray-800 mr-2"
                     >
                       <Edit className="w-4 h-4 inline" />

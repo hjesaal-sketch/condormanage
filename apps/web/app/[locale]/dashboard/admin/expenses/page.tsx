@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Plus, Edit, Trash2, Eye } from 'lucide-react';
 
 export default function ExpensesPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'es';
   const t = useTranslations('expenses');
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,7 +58,7 @@ export default function ExpensesPage() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">{t('title')}</h1>
         <button
-          onClick={() => router.push('/dashboard/admin/expenses/new')}
+          onClick={() => router.push(`/${locale}/dashboard/admin/expenses/new`)}
           className="bg-blue-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700"
         >
           <Plus className="w-4 h-4" />
@@ -95,7 +97,7 @@ export default function ExpensesPage() {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <button
-                      onClick={() => router.push(`/dashboard/admin/expenses/${expense.id}/edit`)}
+                      onClick={() => router.push(`/${locale}/dashboard/admin/expenses/${expense.id}/edit`)}
                       className="text-gray-600 hover:text-gray-800 mr-2"
                     >
                       <Edit className="w-4 h-4 inline" />
