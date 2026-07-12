@@ -144,7 +144,7 @@ export default function ExpenseForm({ expenseId, initialData }: ExpenseFormProps
           value={formData.notes}
           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
           className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
-          placeholder="Notas adicionales"
+          placeholder={t('notes_placeholder')}
         />
       </div>
 
@@ -154,7 +154,7 @@ export default function ExpenseForm({ expenseId, initialData }: ExpenseFormProps
           disabled={loading}
           className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700"
         >
-          {loading ? 'Guardando...' : t('save')}
+          {loading ? t('saving') : t('save')}
         </button>
         <button
           type="button"

@@ -337,6 +337,9 @@
   },
   "expenses": {
     "title": "Despesas",
+    "form_description": "Preencha os campos para registrar uma nova despesa",
+    "notes_placeholder": "Notas adicionais",
+    "saving": "Salvando...",
     "new": "Nova Despesa",
     "edit": "Editar Despesa",
     "category": "Categoria",

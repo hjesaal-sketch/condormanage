@@ -337,6 +337,9 @@
   },
   "expenses": {
     "title": "Expenses",
+    "form_description": "Complete the fields to register a new expense",
+    "notes_placeholder": "Additional notes",
+    "saving": "Saving...",
     "new": "New Expense",
     "edit": "Edit Expense",
     "category": "Category",
