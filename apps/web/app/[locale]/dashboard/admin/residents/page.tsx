@@ -66,7 +66,7 @@ export default function ResidentsPage() {
           <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
           <input
             type="text"
-            placeholder={`${t('name')} o ${t('email')}`}
+            placeholder={t('search_placeholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border rounded-lg"
@@ -83,12 +83,12 @@ export default function ResidentsPage() {
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('phone')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('unit')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('relationship')}</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">Acciones</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={6} className="text-center py-8">Cargando...</td></tr>
+              <tr><td colSpan={6} className="text-center py-8">{t('loading')}</td></tr>
             ) : residents.length === 0 ? (
               <tr><td colSpan={6} className="text-center py-8 text-gray-500">{t('no_residents')}</td></tr>
             ) : (
@@ -105,7 +105,7 @@ export default function ResidentsPage() {
                   <td className="px-4 py-3">{resident.email}</td>
                   <td className="px-4 py-3">{resident.phone || '-'}</td>
                   <td className="px-4 py-3">
-                    {resident.unit_user_rel?.[0]?.unit_id || 'Sin asignar'}
+                    {resident.unit_user_rel?.[0]?.unit_id || t('unassigned')}
                   </td>
                   <td className="px-4 py-3">
                     {resident.unit_user_rel?.[0]?.relationship 
