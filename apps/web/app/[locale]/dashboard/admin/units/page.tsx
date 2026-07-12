@@ -94,7 +94,7 @@ export default function UnitsPage() {
           onClick={() => setFilters({ type: '', status: '', floor: '' })}
           className="text-gray-500 hover:text-gray-700"
         >
-          Limpiar
+          {t('clear_filters')}
         </button>
       </div>
 
@@ -108,14 +108,14 @@ export default function UnitsPage() {
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('type')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('status')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('area')}</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">Acciones</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={6} className="text-center py-8">Cargando...</td></tr>
+              <tr><td colSpan={6} className="text-center py-8">{t('loading')}</td></tr>
             ) : units.length === 0 ? (
-              <tr><td colSpan={6} className="text-center py-8 text-gray-500">No hay unidades</td></tr>
+              <tr><td colSpan={6} className="text-center py-8 text-gray-500">{t('no_units')}</td></tr>
             ) : (
               units.map((unit: any) => (
                 <tr key={unit.id} className="border-t hover:bg-gray-50">
