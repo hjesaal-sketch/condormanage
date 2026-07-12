@@ -201,21 +201,40 @@
   },
   "maintenance": {
     "title": "Manutenção",
+    "new": "Novo Chamado",
+    "edit": "Editar Chamado",
     "ticket": "Chamado",
+    "unit": "Unidade",
+    "title_field": "Título",
     "description": "Descrição",
+    "priority": "Prioridade",
+    "status": "Status",
     "assigned_to": "Atribuído a",
-    "status": {
-      "open": "Aberto",
-      "in_progress": "Em andamento",
-      "resolved": "Resolvido",
-      "closed": "Fechado",
-      "cancelled": "Cancelado"
+    "created_by": "Criado por",
+    "created_at": "Data de criação",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza que deseja excluir este chamado?",
+    "no_tickets": "Nenhum chamado",
+    "loading": "Carregando...",
+    "actions": "Ações",
+    "select_unit": "Selecionar unidade",
+    "unassigned": "Não atribuído",
+    "saving": "Salvando...",
+    "clear_filters": "Limpar filtros",
+    "statuses": {
+      "OPEN": "Aberto",
+      "IN_PROGRESS": "Em andamento",
+      "RESOLVED": "Resolvido",
+      "CLOSED": "Fechado",
+      "CANCELLED": "Cancelado"
     },
-    "priority": {
-      "low": "Baixa",
-      "medium": "Média",
-      "high": "Alta",
-      "urgent": "Urgente"
+    "priorities": {
+      "LOW": "Baixa",
+      "MEDIUM": "Média",
+      "HIGH": "Alta",
+      "URGENT": "Urgente"
     }
   },
   "reservations": {

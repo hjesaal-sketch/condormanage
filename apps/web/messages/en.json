@@ -201,21 +201,40 @@
   },
   "maintenance": {
     "title": "Maintenance",
+    "new": "New Ticket",
+    "edit": "Edit Ticket",
     "ticket": "Ticket",
+    "unit": "Unit",
+    "title_field": "Title",
     "description": "Description",
+    "priority": "Priority",
+    "status": "Status",
     "assigned_to": "Assigned to",
-    "status": {
-      "open": "Open",
-      "in_progress": "In progress",
-      "resolved": "Resolved",
-      "closed": "Closed",
-      "cancelled": "Cancelled"
+    "created_by": "Created by",
+    "created_at": "Creation date",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm_delete": "Are you sure you want to delete this ticket?",
+    "no_tickets": "No tickets",
+    "loading": "Loading...",
+    "actions": "Actions",
+    "select_unit": "Select unit",
+    "unassigned": "Unassigned",
+    "saving": "Saving...",
+    "clear_filters": "Clear filters",
+    "statuses": {
+      "OPEN": "Open",
+      "IN_PROGRESS": "In progress",
+      "RESOLVED": "Resolved",
+      "CLOSED": "Closed",
+      "CANCELLED": "Cancelled"
     },
-    "priority": {
-      "low": "Low",
-      "medium": "Medium",
-      "high": "High",
-      "urgent": "Urgent"
+    "priorities": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High",
+      "URGENT": "Urgent"
     }
   },
   "reservations": {
