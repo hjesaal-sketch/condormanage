@@ -240,17 +240,33 @@
   },
   "reservations": {
     "title": "Reservations",
+    "new": "New Reservation",
+    "edit": "Edit Reservation",
     "area": "Area",
+    "unit": "Unit",
     "date": "Date",
-    "time": "Time",
-    "start": "Start",
-    "end": "End",
-    "status": {
-      "pending": "Pending",
-      "approved": "Approved",
-      "rejected": "Rejected",
-      "cancelled": "Cancelled",
-      "completed": "Completed"
+    "start_time": "Start time",
+    "end_time": "End time",
+    "notes": "Notes",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm_delete": "Are you sure you want to delete this reservation?",
+    "form_description": "Complete the fields to register a new reservation",
+    "notes_placeholder": "Additional notes",
+    "no_reservations": "No reservations",
+    "loading": "Loading...",
+    "actions": "Actions",
+    "select_area": "Select area",
+    "select_unit": "Select unit",
+    "saving": "Saving...",
+    "clear_filters": "Clear filters",
+    "statuses": {
+      "PENDING": "Pending",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected",
+      "CANCELLED": "Cancelled",
+      "COMPLETED": "Completed"
     }
   },
   "notifications": {
