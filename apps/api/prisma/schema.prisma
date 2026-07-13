@@ -355,7 +355,7 @@ enum NotificationStatus {
 }
 
 // ============================================================
-// 9. DOCUMENTS (GESTIÓN DOCUMENTAL)
+// 9. DOCUMENTS (GESTIÓN DOCUMENTAL) - ACTUALIZADO CON CAMPOS FALTANTES
 // ============================================================
 model Document {
   id           String    @id @default(cuid())
@@ -370,13 +370,21 @@ model Document {
   category     DocumentCategory @default(GENERAL)
   tags         String[]  // Array de etiquetas
   
-  // Relación polimórfica (opcional)
-  relatedEntityId String?
-  relatedEntityType String?
+  // 📌 NUEVOS CAMPOS PARA DOCUMENTOS PERSONALIZADOS
+  residentId   String?   @map("resident_id")  // FK a users (si es documento personal)
+  isPublic     Boolean   @default(true)       @map("is_public") // Visible para todos
+  isGenerated  Boolean   @default(false)      @map("is_generated") // Generado automáticamente
   
-  uploaderId   String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  // Relación polimórfica (opcional)
+  relatedEntityId String?   @map("related_entity_id")
+  relatedEntityType String? @map("related_entity_type")
+  
+  uploaderId   String     @map("uploader_id")
+  uploader     User       @relation("uploaderDocs", fields: [uploaderId], references: [id])
+  resident     User?      @relation("residentDocs", fields: [residentId], references: [id])
+  
+  createdAt    DateTime  @default(now())      @map("created_at")
+  updatedAt    DateTime  @updatedAt          @map("updated_at")
   
   versions     DocumentVersion[]
 }
@@ -390,6 +398,8 @@ enum DocumentCategory {
   RULES
   MAINTENANCE
   OTHER
+  RECEIPT       // Recibo personalizado
+  CERTIFICATE   // Certificado de residencia
 }
 
 model DocumentVersion {
