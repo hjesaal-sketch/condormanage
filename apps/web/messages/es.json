@@ -251,6 +251,7 @@
     "save": "Guardar",
     "cancel": "Cancelar",
     "delete": "Eliminar",
+    "status": "Estado",
     "confirm_delete": "¿Está seguro de eliminar esta reserva?",
     "form_description": "Complete los campos para registrar una nueva reserva",
     "notes_placeholder": "Notas adicionales",

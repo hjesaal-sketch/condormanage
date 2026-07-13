@@ -251,6 +251,7 @@
     "save": "Salvar",
     "cancel": "Cancelar",
     "delete": "Excluir",
+    "status": "Status",
     "confirm_delete": "Tem certeza que deseja excluir esta reserva?",
     "form_description": "Preencha os campos para registrar uma nova reserva",
     "notes_placeholder": "Notas adicionais",

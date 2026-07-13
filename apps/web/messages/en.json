@@ -251,6 +251,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
+    "status": "Status",
     "confirm_delete": "Are you sure you want to delete this reservation?",
     "form_description": "Complete the fields to register a new reservation",
     "notes_placeholder": "Additional notes",
