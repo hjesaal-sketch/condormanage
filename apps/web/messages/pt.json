@@ -128,18 +128,39 @@
     "bedrooms": "Quartos",
     "bathrooms": "Banheiros",
     "parking": "Vagas",
-    "types": {
+    "property_type": "Tipo de propriedade",
+    "property_types": {
       "apartment": "Apartamento",
-      "penthouse": "Cobertura",
-      "commercial": "Comercial",
-      "parking": "Estacionamento",
-      "storage": "Depósito"
+      "house": "Casa / Condomínio"
+    },
+    "block": "Quadra",
+    "lot": "Lote",
+    "street": "Rua",
+    "details": "Detalhes",
+    "house_badge": "Casa",
+    "new_unit": "Nova Unidade",
+    "edit_unit": "Editar Unidade",
+    "parking_spaces": "Vagas",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza que deseja excluir esta unidade?",
+    "no_units": "Nenhuma unidade",
+    "loading": "Carregando...",
+    "actions": "Ações",
+    "clear_filters": "Limpar filtros",
+    "types": {
+      "APARTMENT": "Apartamento",
+      "PENTHOUSE": "Cobertura",
+      "COMMERCIAL": "Comercial",
+      "PARKING": "Estacionamento",
+      "STORAGE": "Depósito"
     },
     "statuses": {
-      "available": "Disponível",
-      "occupied": "Ocupado",
-      "maintenance": "Manutenção",
-      "rented": "Alugado"
+      "AVAILABLE": "Disponível",
+      "OCCUPIED": "Ocupado",
+      "MAINTENANCE": "Manutenção",
+      "RENTED": "Alugado"
     }
   },
   "billing": {

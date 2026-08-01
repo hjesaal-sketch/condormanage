@@ -22,6 +22,11 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
     bedrooms: '',
     bathrooms: '',
     parkingSpaces: '1',
+    // 📌 Nuevos campos para casas
+    isHouse: false,
+    block: '',
+    lot: '',
+    street: '',
   });
 
   useEffect(() => {
@@ -35,6 +40,10 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
         bedrooms: initialData.bedrooms || '',
         bathrooms: initialData.bathrooms || '',
         parkingSpaces: initialData.parking_spaces || '1',
+        isHouse: initialData.isHouse || false,
+        block: initialData.block || '',
+        lot: initialData.lot || '',
+        street: initialData.street || '',
       });
     }
   }, [initialData]);
@@ -45,11 +54,15 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
 
     const payload = {
       ...formData,
-      floor: formData.floor ? parseInt(formData.floor) : null,
+      floor: formData.isHouse ? null : (formData.floor ? parseInt(formData.floor) : null),
       area: formData.area ? parseFloat(formData.area) : null,
       bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : null,
       bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : null,
       parkingSpaces: parseInt(formData.parkingSpaces) || 1,
+      isHouse: formData.isHouse,
+      block: formData.isHouse ? formData.block : null,
+      lot: formData.isHouse ? formData.lot : null,
+      street: formData.isHouse ? formData.street : null,
     };
 
     try {
@@ -95,13 +108,22 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">{t('floor')}</label>
-          <input
-            type="number"
-            value={formData.floor}
-            onChange={(e) => setFormData({ ...formData, floor: e.target.value })}
+          <label className="block text-sm font-medium text-gray-700">{t('property_type')}</label>
+          <select
+            value={formData.isHouse ? 'house' : 'apartment'}
+            onChange={(e) => {
+              const isHouse = e.target.value === 'house';
+              setFormData({
+                ...formData,
+                isHouse: isHouse,
+                floor: isHouse ? '' : formData.floor,
+              });
+            }}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+          >
+            <option value="apartment">{t('property_types.apartment')}</option>
+            <option value="house">{t('property_types.house')}</option>
+          </select>
         </div>
       </div>
 
@@ -131,6 +153,52 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
           </select>
         </div>
       </div>
+
+      {/* 📌 Campo PISO (visible solo para apartamentos) */}
+      {!formData.isHouse && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700">{t('floor')}</label>
+          <input
+            type="number"
+            value={formData.floor}
+            onChange={(e) => setFormData({ ...formData, floor: e.target.value })}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+      )}
+
+      {/* 📌 Campos para CASAS */}
+      {formData.isHouse && (
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">{t('block')}</label>
+            <input
+              type="text"
+              value={formData.block}
+              onChange={(e) => setFormData({ ...formData, block: e.target.value })}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">{t('lot')}</label>
+            <input
+              type="text"
+              value={formData.lot}
+              onChange={(e) => setFormData({ ...formData, lot: e.target.value })}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">{t('street')}</label>
+            <input
+              type="text"
+              value={formData.street}
+              onChange={(e) => setFormData({ ...formData, street: e.target.value })}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-3 gap-4">
         <div>

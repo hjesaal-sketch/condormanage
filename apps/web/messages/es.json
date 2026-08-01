@@ -128,18 +128,39 @@
     "bedrooms": "Habitaciones",
     "bathrooms": "Baños",
     "parking": "Estacionamientos",
-    "types": {
+    "property_type": "Tipo de propiedad",
+    "property_types": {
       "apartment": "Apartamento",
-      "penthouse": "Penthouse",
-      "commercial": "Comercial",
-      "parking": "Estacionamiento",
-      "storage": "Bodega"
+      "house": "Casa / Urbanización"
+    },
+    "block": "Bloque / Manzana",
+    "lot": "Lote",
+    "street": "Calle",
+    "details": "Detalles",
+    "house_badge": "Casa",
+    "new_unit": "Nueva Unidad",
+    "edit_unit": "Editar Unidad",
+    "parking_spaces": "Estacionamientos",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "confirm_delete": "¿Está seguro de eliminar esta unidad?",
+    "no_units": "No hay unidades",
+    "loading": "Cargando...",
+    "actions": "Acciones",
+    "clear_filters": "Limpiar filtros",
+    "types": {
+      "APARTMENT": "Apartamento",
+      "PENTHOUSE": "Penthouse",
+      "COMMERCIAL": "Comercial",
+      "PARKING": "Estacionamiento",
+      "STORAGE": "Bodega"
     },
     "statuses": {
-      "available": "Disponible",
-      "occupied": "Ocupado",
-      "maintenance": "Mantenimiento",
-      "rented": "Alquilado"
+      "AVAILABLE": "Disponible",
+      "OCCUPIED": "Ocupado",
+      "MAINTENANCE": "Mantenimiento",
+      "RENTED": "Alquilado"
     }
   },
   "billing": {

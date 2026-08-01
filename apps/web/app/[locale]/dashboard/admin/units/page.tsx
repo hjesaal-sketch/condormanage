@@ -104,10 +104,10 @@ export default function UnitsPage() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('number')}</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('floor')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('type')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('status')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('area')}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t('details')}</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">{t('actions')}</th>
             </tr>
           </thead>
@@ -119,8 +119,28 @@ export default function UnitsPage() {
             ) : (
               units.map((unit: any) => (
                 <tr key={unit.id} className="border-t hover:bg-gray-50">
-                  <td className="px-4 py-3">{unit.number}</td>
-                  <td className="px-4 py-3">{unit.floor || '-'}</td>
+                  <td className="px-4 py-3">
+                    <div>
+                      <span className="font-medium">{unit.number}</span>
+                      {unit.isHouse && (
+                        <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                          {t('house_badge')}
+                        </span>
+                      )}
+                    </div>
+                    {unit.isHouse && (
+                      <div className="text-xs text-gray-500 mt-0.5">
+                        {unit.block && `${t('block')}: ${unit.block}`}
+                        {unit.lot && `, ${t('lot')}: ${unit.lot}`}
+                        {unit.street && `, ${t('street')}: ${unit.street}`}
+                      </div>
+                    )}
+                    {!unit.isHouse && unit.floor && (
+                      <div className="text-xs text-gray-500 mt-0.5">
+                        {t('floor')}: {unit.floor}
+                      </div>
+                    )}
+                  </td>
                   <td className="px-4 py-3">{t(`types.${unit.type}`)}</td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-1 rounded-full text-xs ${
@@ -132,6 +152,13 @@ export default function UnitsPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3">{unit.area || '-'} m²</td>
+                  <td className="px-4 py-3">
+                    {unit.bedrooms && `${unit.bedrooms}h`}
+                    {unit.bedrooms && unit.bathrooms && ' / '}
+                    {unit.bathrooms && `${unit.bathrooms}b`}
+                    {unit.parking_spaces && ` / ${unit.parking_spaces}p`}
+                    {!unit.bedrooms && !unit.bathrooms && !unit.parking_spaces && '-'}
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <button
                       onClick={() => router.push(`/${locale}/dashboard/admin/units/${unit.id}`)}

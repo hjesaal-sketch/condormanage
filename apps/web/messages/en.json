@@ -128,18 +128,39 @@
     "bedrooms": "Bedrooms",
     "bathrooms": "Bathrooms",
     "parking": "Parking",
-    "types": {
+    "property_type": "Property type",
+    "property_types": {
       "apartment": "Apartment",
-      "penthouse": "Penthouse",
-      "commercial": "Commercial",
-      "parking": "Parking",
-      "storage": "Storage"
+      "house": "House / Gated community"
+    },
+    "block": "Block",
+    "lot": "Lot",
+    "street": "Street",
+    "details": "Details",
+    "house_badge": "House",
+    "new_unit": "New Unit",
+    "edit_unit": "Edit Unit",
+    "parking_spaces": "Parking Spaces",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm_delete": "Are you sure you want to delete this unit?",
+    "no_units": "No units",
+    "loading": "Loading...",
+    "actions": "Actions",
+    "clear_filters": "Clear filters",
+    "types": {
+      "APARTMENT": "Apartment",
+      "PENTHOUSE": "Penthouse",
+      "COMMERCIAL": "Commercial",
+      "PARKING": "Parking",
+      "STORAGE": "Storage"
     },
     "statuses": {
-      "available": "Available",
-      "occupied": "Occupied",
-      "maintenance": "Maintenance",
-      "rented": "Rented"
+      "AVAILABLE": "Available",
+      "OCCUPIED": "Occupied",
+      "MAINTENANCE": "Maintenance",
+      "RENTED": "Rented"
     }
   },
   "billing": {
