@@ -149,6 +149,7 @@
     "loading": "Cargando...",
     "actions": "Acciones",
     "clear_filters": "Limpiar filtros",
+    "form_description": "Complete los campos para registrar una nueva unidad",
     "types": {
       "APARTMENT": "Apartamento",
       "PENTHOUSE": "Penthouse",
@@ -304,41 +305,6 @@
       "emergency": "Emergencia"
     }
   },
-  "units": {
-    "title": "Unidades",
-    "new_unit": "Nueva Unidad",
-    "edit_unit": "Editar Unidad",
-    "number": "Número",
-    "floor": "Piso",
-    "area": "Área (m²)",
-    "type": "Tipo",
-    "status": "Estado",
-    "bedrooms": "Habitaciones",
-    "bathrooms": "Baños",
-    "clear_filters": "Limpiar filtros",
-    "actions": "Acciones",
-    "loading": "Cargando...",
-    "no_units": "No hay unidades",
-    "parking_spaces": "Estacionamientos",
-    "save": "Guardar",
-    "cancel": "Cancelar",
-    "delete": "Eliminar",
-    "confirm_delete": "¿Está seguro de eliminar esta unidad?",
-    "form_description": "Complete los campos para registrar una nueva unidad",
-    "types": {
-      "APARTMENT": "Apartamento",
-      "PENTHOUSE": "Penthouse",
-      "COMMERCIAL": "Comercial",
-      "PARKING": "Estacionamiento",
-      "STORAGE": "Bodega"
-    },
-    "statuses": {
-      "AVAILABLE": "Disponible",
-      "OCCUPIED": "Ocupado",
-      "MAINTENANCE": "Mantenimiento",
-      "RENTED": "Alquilado"
-    }
-  },
   "residents": {
     "title": "Residentes",
     "new": "Nuevo Residente",
@@ -472,4 +438,4 @@
     "confirm_delete": "¿Está seguro de eliminar este gasto?",
     "no_expenses": "No hay gastos"
   }
-}" " 
+}
