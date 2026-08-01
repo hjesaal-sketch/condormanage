@@ -93,6 +93,25 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
     }
   };
 
+  // 📌 Opciones de "Tipo" según el tipo de propiedad
+  const getTypeOptions = () => {
+    if (formData.isHouse) {
+      return [
+        { value: 'HOUSE', label: t('types.HOUSE') },
+        { value: 'COMMERCIAL', label: t('types.COMMERCIAL') },
+        { value: 'PARKING', label: t('types.PARKING') },
+        { value: 'STORAGE', label: t('types.STORAGE') }
+      ];
+    }
+    return [
+      { value: 'APARTMENT', label: t('types.APARTMENT') },
+      { value: 'PENTHOUSE', label: t('types.PENTHOUSE') },
+      { value: 'COMMERCIAL', label: t('types.COMMERCIAL') },
+      { value: 'PARKING', label: t('types.PARKING') },
+      { value: 'STORAGE', label: t('types.STORAGE') }
+    ];
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl bg-white p-6 rounded-xl shadow-sm">
       <div className="grid grid-cols-2 gap-4">
@@ -116,6 +135,8 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
                 ...formData,
                 isHouse: isHouse,
                 floor: isHouse ? '' : formData.floor,
+                // 📌 Resetear tipo a APARTMENT cuando cambia a apartamento
+                type: isHouse ? 'HOUSE' : 'APARTMENT',
               });
             }}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -144,11 +165,11 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
             onChange={(e) => setFormData({ ...formData, type: e.target.value })}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="APARTMENT" className="text-gray-900">{t('types.APARTMENT')}</option>
-            <option value="PENTHOUSE" className="text-gray-900">{t('types.PENTHOUSE')}</option>
-            <option value="COMMERCIAL" className="text-gray-900">{t('types.COMMERCIAL')}</option>
-            <option value="PARKING" className="text-gray-900">{t('types.PARKING')}</option>
-            <option value="STORAGE" className="text-gray-900">{t('types.STORAGE')}</option>
+            {getTypeOptions().map((option) => (
+              <option key={option.value} value={option.value} className="text-gray-900">
+                {option.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>

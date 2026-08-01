@@ -155,7 +155,8 @@
       "PENTHOUSE": "Cobertura",
       "COMMERCIAL": "Comercial",
       "PARKING": "Estacionamento",
-      "STORAGE": "Depósito"
+      "STORAGE": "Depósito",
+      "HOUSE": "Casa"
     },
     "statuses": {
       "AVAILABLE": "Disponível",

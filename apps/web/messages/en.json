@@ -155,7 +155,8 @@
       "PENTHOUSE": "Penthouse",
       "COMMERCIAL": "Commercial",
       "PARKING": "Parking",
-      "STORAGE": "Storage"
+      "STORAGE": "Storage",
+      "HOUSE": "House"
     },
     "statuses": {
       "AVAILABLE": "Available",
