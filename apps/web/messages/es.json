@@ -403,6 +403,33 @@
     },
     "created_at": "Fecha de creación"
   },
+  "settings": {
+    "title": "Configuración",
+    "description": "Configura los parámetros generales del sistema",
+    "general": "General",
+    "billing": "Facturación",
+    "reservations": "Reservas",
+    "security": "Seguridad",
+    "appearance": "Apariencia",
+    "save": "Guardar Cambios",
+    "saving": "Guardando...",
+    "saved": "Configuración guardada correctamente",
+    "error": "Error al guardar configuración",
+    "fields": {
+      "condo_name": "Nombre del condominio",
+      "logo": "Logo",
+      "contact": "Contacto",
+      "currency": "Moneda",
+      "due_day": "Día de vencimiento",
+      "issue_day": "Día de emisión",
+      "late_fee": "Tasa de mora (%)",
+      "reservation_days": "Días de anticipación",
+      "reservation_start": "Hora de inicio",
+      "reservation_end": "Hora de fin",
+      "login_attempts": "Intentos de login",
+      "session_timeout": "Tiempo de sesión (minutos)"
+    }
+  },
   "expenses": {
     "title": "Gastos",
     "form_description": "Complete los campos para registrar un nuevo gasto",

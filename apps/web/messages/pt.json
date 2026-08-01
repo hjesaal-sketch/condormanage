@@ -403,6 +403,33 @@
     },
     "created_at": "Criado em"
   },
+  "settings": {
+    "title": "Configurações",
+    "description": "Configure os parâmetros gerais do sistema",
+    "general": "Geral",
+    "billing": "Faturamento",
+    "reservations": "Reservas",
+    "security": "Segurança",
+    "appearance": "Aparência",
+    "save": "Salvar Alterações",
+    "saving": "Salvando...",
+    "saved": "Configurações salvas com sucesso",
+    "error": "Erro ao salvar configurações",
+    "fields": {
+      "condo_name": "Nome do condomínio",
+      "logo": "Logotipo",
+      "contact": "Contato",
+      "currency": "Moeda",
+      "due_day": "Dia de vencimento",
+      "issue_day": "Dia de emissão",
+      "late_fee": "Taxa de mora (%)",
+      "reservation_days": "Dias de antecedência",
+      "reservation_start": "Hora de início",
+      "reservation_end": "Hora de fim",
+      "login_attempts": "Tentativas de login",
+      "session_timeout": "Tempo de sessão (minutos)"
+    }
+  },
   "expenses": {
     "title": "Despesas",
     "form_description": "Preencha os campos para registrar uma nova despesa",

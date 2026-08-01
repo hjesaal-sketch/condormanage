@@ -403,6 +403,33 @@
     },
     "created_at": "Created at"
   },
+  "settings": {
+    "title": "Settings",
+    "description": "Configure the system general parameters",
+    "general": "General",
+    "billing": "Billing",
+    "reservations": "Reservations",
+    "security": "Security",
+    "appearance": "Appearance",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "saved": "Settings saved successfully",
+    "error": "Error saving settings",
+    "fields": {
+      "condo_name": "Condominium name",
+      "logo": "Logo",
+      "contact": "Contact",
+      "currency": "Currency",
+      "due_day": "Due day",
+      "issue_day": "Issue day",
+      "late_fee": "Late fee (%)",
+      "reservation_days": "Advance days",
+      "reservation_start": "Start time",
+      "reservation_end": "End time",
+      "login_attempts": "Login attempts",
+      "session_timeout": "Session timeout (minutes)"
+    }
+  },
   "expenses": {
     "title": "Expenses",
     "form_description": "Complete the fields to register a new expense",
