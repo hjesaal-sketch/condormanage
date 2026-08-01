@@ -22,7 +22,6 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
     bedrooms: '',
     bathrooms: '',
     parkingSpaces: '1',
-    // 📌 Nuevos campos para casas
     isHouse: false,
     block: '',
     lot: '',
@@ -154,7 +153,6 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
         </div>
       </div>
 
-      {/* 📌 Campo PISO (visible solo para apartamentos) */}
       {!formData.isHouse && (
         <div>
           <label className="block text-sm font-medium text-gray-700">{t('floor')}</label>
@@ -167,7 +165,6 @@ export default function UnitForm({ unitId, initialData }: UnitFormProps) {
         </div>
       )}
 
-      {/* 📌 Campos para CASAS */}
       {formData.isHouse && (
         <div className="grid grid-cols-3 gap-4">
           <div>
