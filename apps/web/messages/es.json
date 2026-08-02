@@ -360,6 +360,27 @@
     "confirm_delete": "¿Está seguro de eliminar este servicio?",
     "no_services": "No hay servicios"
   },
+  "commonAreas": {
+    "title": "Áreas Comunes",
+    "description": "Administra las áreas comunes disponibles para reservar",
+    "new_area": "Nueva Área",
+    "edit_area": "Editar Área",
+    "name": "Nombre",
+    "description": "Descripción",
+    "capacity": "Capacidad",
+    "hourly_rate": "Tarifa por Hora",
+    "deposit": "Depósito",
+    "requires_deposit": "Requiere Depósito",
+    "deposit_amount": "Monto del Depósito",
+    "status": "Estado",
+    "active": "Activa",
+    "inactive": "Inactiva",
+    "save": "Guardar",
+    "update": "Actualizar",
+    "cancel": "Cancelar",
+    "no_areas": "No hay áreas comunes registradas",
+    "confirm_delete": "¿Estás seguro de eliminar esta área?"
+  },
   "documents": {
     "title": "Documentos",
     "new": "Nuevo Documento",

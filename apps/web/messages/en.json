@@ -360,6 +360,27 @@
     "confirm_delete": "Are you sure you want to delete this service?",
     "no_services": "No services"
   },
+  "commonAreas": {
+    "title": "Common Areas",
+    "description": "Manage common areas available for reservation",
+    "new_area": "New Area",
+    "edit_area": "Edit Area",
+    "name": "Name",
+    "description": "Description",
+    "capacity": "Capacity",
+    "hourly_rate": "Hourly Rate",
+    "deposit": "Deposit",
+    "requires_deposit": "Requires Deposit",
+    "deposit_amount": "Deposit Amount",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "no_areas": "No common areas registered",
+    "confirm_delete": "Are you sure you want to delete this area?"
+  },
   "documents": {
     "title": "Documents",
     "new": "New Document",
