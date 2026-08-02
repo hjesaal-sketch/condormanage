@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { 
-  LayoutDashboard, 
-  Building2, 
-  Users, 
-  DollarSign, 
+import {
+  LayoutDashboard,
+  Building2,
+  Users,
+  DollarSign,
   Wrench,
   Settings,
   FileText,
@@ -29,6 +29,7 @@ export default function AdminDashboardPage() {
   const commonT = useTranslations('common');
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<any>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -47,12 +48,27 @@ export default function AdminDashboardPage() {
         return;
       }
       setUser(parsedUser);
+      fetchStats(token);
     } catch {
       router.push('/login');
     } finally {
       setLoading(false);
     }
   }, [router]);
+
+  const fetchStats = async (token: string) => {
+    try {
+      const res = await fetch('/api/dashboard/stats', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStats(data.stats);
+      }
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -132,10 +148,36 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <StatCard icon={Building2} title={t('properties')} value="20" change="+2" color="blue" />
-            <StatCard icon={Users} title={t('residents')} value="45" change="+5" color="green" />
-            <StatCard icon={DollarSign} title={t('income')} value="$12,500" change="+8%" color="purple" />
-            <StatCard icon={Wrench} title={t('maintenance')} value="3" change="-" color="orange" />
+            <StatCard 
+              icon={Building2} 
+              title={t('properties')} 
+              value={stats?.units || 0} 
+              change="+" 
+              color="blue" 
+            />
+            <StatCard 
+              icon={Users} 
+              title={t('residents')} 
+              value={stats?.residents || 0} 
+              change="+" 
+              color="green" 
+            />
+            <StatCard 
+              icon={DollarSign} 
+              title={t('income')} 
+              value={stats?.income?.formatted?.usd || '$0'} 
+              subtitle={stats?.income?.formatted?.ves ? `Bs. ${stats.income.formatted.ves}` : undefined}
+              change="+" 
+              color="purple" 
+            />
+            <StatCard 
+              icon={Wrench} 
+              title={t('pending')} 
+              value={stats?.pending?.formatted?.usd || '$0'} 
+              subtitle={stats?.pending?.formatted?.ves ? `Bs. ${stats.pending.formatted.ves}` : undefined}
+              change="-" 
+              color="orange" 
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -178,7 +220,7 @@ function SidebarContent({ t, commonT, user, handleLogout, locale }: { t: any; co
       <SidebarItem icon={FileText} label={commonT('documents')} href={`/${locale}/dashboard/admin/documents`} />
       <SidebarItem icon={Settings} label={commonT('settings')} href={`/${locale}/dashboard/admin/settings`} />
       <div className="pt-6 mt-6 border-t border-gray-100">
-        <button 
+        <button
           onClick={handleLogout}
           className="flex items-center gap-3 w-full px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
         >
@@ -202,7 +244,21 @@ function SidebarItem({ icon: Icon, label, href, active = false }: { icon: any; l
   );
 }
 
-function StatCard({ icon: Icon, title, value, change, color }: { icon: any; title: string; value: string; change: string; color: string }) {
+function StatCard({ 
+  icon: Icon, 
+  title, 
+  value, 
+  subtitle, 
+  change, 
+  color 
+}: { 
+  icon: any; 
+  title: string; 
+  value: string | number; 
+  subtitle?: string; 
+  change: string; 
+  color: string 
+}) {
   const colors = {
     blue: 'bg-blue-50 text-blue-600',
     green: 'bg-green-50 text-green-600',
@@ -215,12 +271,13 @@ function StatCard({ icon: Icon, title, value, change, color }: { icon: any; titl
         <div className={`p-3 rounded-xl ${colors[color as keyof typeof colors]}`}>
           <Icon className="w-5 h-5" />
         </div>
-        <span className={`text-sm font-medium ${change.startsWith('+') ? 'text-green-600' : change.startsWith('-') ? 'text-gray-400' : 'text-gray-400'}`}>
+        <span className={`text-sm font-medium ${change === '+' ? 'text-green-600' : change === '-' ? 'text-gray-400' : 'text-gray-400'}`}>
           {change}
         </span>
       </div>
       <p className="text-2xl font-bold text-gray-800">{value}</p>
-      <p className="text-sm text-gray-500">{title}</p>
+      {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
+      <p className="text-sm text-gray-500 mt-1">{title}</p>
     </div>
   );
 }
