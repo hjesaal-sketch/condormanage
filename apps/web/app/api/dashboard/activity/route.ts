@@ -64,7 +64,7 @@ export async function GET(request: Request) {
     const residents = await residentsRes.json();
 
     // Construir actividad
-    const activities = [];
+    const activities: any[] = [];
 
     // Facturas
     invoices.forEach((inv: any) => {
