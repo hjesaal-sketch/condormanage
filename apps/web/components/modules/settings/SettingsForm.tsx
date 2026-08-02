@@ -23,6 +23,9 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
     reservationEnd: settings?.reservationEnd || '20:00',
     loginAttempts: settings?.loginAttempts || 5,
     sessionTimeout: settings?.sessionTimeout || 60,
+    // 🆕 Nuevos campos para tasa de cambio
+    exchangeRate: settings?.exchangeRate || 0,
+    exchangeRateDate: settings?.exchangeRateDate || new Date().toISOString().split('T')[0],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,6 +88,34 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
               <option value="PEN">PEN</option>
               <option value="MXN">MXN</option>
             </select>
+          </div>
+        </div>
+        {/* 🆕 Tasa de cambio */}
+        <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-gray-100">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              {t('fields.exchange_rate')}
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              value={formData.exchangeRate}
+              onChange={(e) => setFormData({ ...formData, exchangeRate: parseFloat(e.target.value) })}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
+              placeholder="0.00"
+            />
+            <p className="text-xs text-gray-500 mt-1">{t('fields.exchange_rate_help')}</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              {t('fields.exchange_rate_date')}
+            </label>
+            <input
+              type="date"
+              value={formData.exchangeRateDate}
+              onChange={(e) => setFormData({ ...formData, exchangeRateDate: e.target.value })}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
+            />
           </div>
         </div>
       </div>

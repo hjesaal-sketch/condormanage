@@ -427,7 +427,10 @@
       "reservation_start": "Hora de inicio",
       "reservation_end": "Hora de fin",
       "login_attempts": "Intentos de login",
-      "session_timeout": "Tiempo de sesión (minutos)"
+      "session_timeout": "Tiempo de sesión (minutos)",
+      "exchange_rate": "Tasa de cambio (USD/VES)",
+      "exchange_rate_help": "Tasa oficial del BCV para el día de hoy",
+      "exchange_rate_date": "Fecha de la tasa"
     }
   },
   "expenses": {

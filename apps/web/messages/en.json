@@ -427,7 +427,10 @@
       "reservation_start": "Start time",
       "reservation_end": "End time",
       "login_attempts": "Login attempts",
-      "session_timeout": "Session timeout (minutes)"
+      "session_timeout": "Session timeout (minutes)",
+      "exchange_rate": "Exchange rate (USD/VES)",
+      "exchange_rate_help": "Official BCV rate for today",
+      "exchange_rate_date": "Rate date"
     }
   },
   "expenses": {
