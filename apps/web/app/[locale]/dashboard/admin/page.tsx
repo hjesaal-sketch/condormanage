@@ -94,10 +94,10 @@ export default function AdminDashboardPage() {
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
 
-    if (days > 0) return `Hace ${days} día${days > 1 ? 's' : ''}`;
-    if (hours > 0) return `Hace ${hours} hora${hours > 1 ? 's' : ''}`;
-    if (minutes > 0) return `Hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
-    return 'Hace un momento';
+    if (days > 0) return t('time_ago_days', { count: days });
+    if (hours > 0) return t('time_ago_hours', { count: hours });
+    if (minutes > 0) return t('time_ago_minutes', { count: minutes });
+    return t('time_ago_moment');
   };
 
   if (loading) {
@@ -209,7 +209,7 @@ export default function AdminDashboardPage() {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('recent_activity')}</h3>
               <div className="space-y-4">
                 {activities.length === 0 ? (
-                  <p className="text-gray-500 text-sm text-center py-4">No hay actividad reciente</p>
+                  <p className="text-gray-500 text-sm text-center py-4">{t('no_activity')}</p>
                 ) : (
                   activities.map((activity: any) => {
                     const iconMap: Record<string, any> = {
@@ -259,7 +259,7 @@ function SidebarContent({ t, commonT, user, handleLogout, locale }: { t: any; co
       <SidebarItem icon={CreditCard} label={commonT('expenses')} href={`/${locale}/dashboard/admin/expenses`} />
       <SidebarItem icon={Wrench} label={t('maintenance')} href={`/${locale}/dashboard/admin/maintenance`} />
       <SidebarItem icon={Calendar} label={commonT('reservations')} href={`/${locale}/dashboard/admin/reservations`} />
-      <SidebarItem icon={Layers} label="Áreas Comunes" href={`/${locale}/dashboard/admin/common-areas`} />
+      <SidebarItem icon={Layers} label={t('common_areas')} href={`/${locale}/dashboard/admin/common-areas`} />
       <SidebarItem icon={FileText} label={commonT('documents')} href={`/${locale}/dashboard/admin/documents`} />
       <SidebarItem icon={Settings} label={commonT('settings')} href={`/${locale}/dashboard/admin/settings`} />
       <div className="pt-6 mt-6 border-t border-gray-100">
