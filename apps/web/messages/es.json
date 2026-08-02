@@ -415,6 +415,9 @@
     "saving": "Guardando...",
     "saved": "Configuración guardada correctamente",
     "error": "Error al guardar configuración",
+    "rate_updated": "Tasa de cambio actualizada correctamente",
+    "Error al actualizar la tasa de cambio",
+    "update_exchange_rate": "Actualizar tasa del BCV",
     "fields": {
       "condo_name": "Nombre del condominio",
       "logo": "Logo",

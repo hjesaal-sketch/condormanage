@@ -415,6 +415,9 @@
     "saving": "Salvando...",
     "saved": "Configurações salvas com sucesso",
     "error": "Erro ao salvar configurações",
+    "rate_updated": "Taxa de câmbio atualizada com sucesso",
+    "rate_update_error": "Erro ao atualizar a taxa de câmbio",
+    "update_exchange_rate": "Atualizar taxa do BCV",
     "fields": {
       "condo_name": "Nome do condomínio",
       "logo": "Logotipo",

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Save } from 'lucide-react';
+import { Save, RefreshCw } from 'lucide-react';
 
 interface SettingsFormProps {
   settings: any;
@@ -12,6 +12,7 @@ interface SettingsFormProps {
 export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
   const t = useTranslations('settings');
   const [loading, setLoading] = useState(false);
+  const [updatingRate, setUpdatingRate] = useState(false);
   const [formData, setFormData] = useState({
     condoName: settings?.condoName || '',
     currency: settings?.currency || 'USD',
@@ -23,10 +24,30 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
     reservationEnd: settings?.reservationEnd || '20:00',
     loginAttempts: settings?.loginAttempts || 5,
     sessionTimeout: settings?.sessionTimeout || 60,
-    // 🆕 Nuevos campos para tasa de cambio
     exchangeRate: settings?.exchangeRate || 0,
     exchangeRateDate: settings?.exchangeRateDate || new Date().toISOString().split('T')[0],
   });
+
+  const updateExchangeRate = async () => {
+    setUpdatingRate(true);
+    try {
+      const res = await fetch('/api/billing/rates');
+      const data = await res.json();
+      if (data.success && data.rate) {
+        setFormData({
+          ...formData,
+          exchangeRate: data.rate.usd,
+          exchangeRateDate: new Date().toISOString().split('T')[0]
+        });
+        alert(t('rate_updated'));
+      }
+    } catch (error) {
+      console.error('Error updating rate:', error);
+      alert(t('rate_update_error'));
+    } finally {
+      setUpdatingRate(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +80,6 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl bg-white p-6 rounded-xl shadow-sm">
-      {/* General */}
       <div>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">{t('general')}</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -90,20 +110,29 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
             </select>
           </div>
         </div>
-        {/* 🆕 Tasa de cambio */}
         <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-gray-100">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               {t('fields.exchange_rate')}
             </label>
-            <input
-              type="number"
-              step="0.01"
-              value={formData.exchangeRate}
-              onChange={(e) => setFormData({ ...formData, exchangeRate: parseFloat(e.target.value) })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
-              placeholder="0.00"
-            />
+            <div className="flex gap-2">
+              <input
+                type="number"
+                step="0.01"
+                value={formData.exchangeRate}
+                onChange={(e) => setFormData({ ...formData, exchangeRate: parseFloat(e.target.value) })}
+                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white"
+                placeholder="0.00"
+              />
+              <button
+                type="button"
+                onClick={updateExchangeRate}
+                disabled={updatingRate}
+                className="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 disabled:opacity-50 flex items-center gap-1"
+              >
+                <RefreshCw className={`w-4 h-4 ${updatingRate ? 'animate-spin' : ''}`} />
+              </button>
+            </div>
             <p className="text-xs text-gray-500 mt-1">{t('fields.exchange_rate_help')}</p>
           </div>
           <div>
@@ -120,7 +149,6 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
         </div>
       </div>
 
-      {/* Billing */}
       <div>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">{t('billing')}</h2>
         <div className="grid grid-cols-3 gap-4">
@@ -160,7 +188,6 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
         </div>
       </div>
 
-      {/* Reservations */}
       <div>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">{t('reservations')}</h2>
         <div className="grid grid-cols-3 gap-4">
@@ -195,7 +222,6 @@ export default function SettingsForm({ settings, onSave }: SettingsFormProps) {
         </div>
       </div>
 
-      {/* Security */}
       <div>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">{t('security')}</h2>
         <div className="grid grid-cols-2 gap-4">

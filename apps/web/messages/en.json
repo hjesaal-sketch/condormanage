@@ -415,6 +415,9 @@
     "saving": "Saving...",
     "saved": "Settings saved successfully",
     "error": "Error saving settings",
+    "rate_updated": "Exchange rate updated successfully",
+    "rate_update_error": "Error updating exchange rate",
+    "update_exchange_rate": "Update BCV rate",
     "fields": {
       "condo_name": "Condominium name",
       "logo": "Logo",
