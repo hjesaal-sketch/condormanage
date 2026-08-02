@@ -30,6 +30,7 @@ export default function AdminDashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<any>(null);
+  const [activities, setActivities] = useState<any[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function AdminDashboardPage() {
         return;
       }
       setUser(parsedUser);
-      fetchStats(token);
+      fetchDashboardData(token);
     } catch {
       router.push('/login');
     } finally {
@@ -56,17 +57,27 @@ export default function AdminDashboardPage() {
     }
   }, [router]);
 
-  const fetchStats = async (token: string) => {
+  const fetchDashboardData = async (token: string) => {
     try {
-      const res = await fetch('/api/dashboard/stats', {
+      // Obtener estadísticas
+      const statsRes = await fetch('/api/dashboard/stats', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      const data = await res.json();
-      if (data.success) {
-        setStats(data.stats);
+      const statsData = await statsRes.json();
+      if (statsData.success) {
+        setStats(statsData.stats);
+      }
+
+      // Obtener actividad reciente
+      const activityRes = await fetch('/api/dashboard/activity', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const activityData = await activityRes.json();
+      if (activityData.success) {
+        setActivities(activityData.activities);
       }
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      console.error('Error fetching dashboard data:', error);
     }
   };
 
@@ -74,6 +85,18 @@ export default function AdminDashboardPage() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     router.push(`/${locale}/login`);
+  };
+
+  const getTimeAgo = (date: string) => {
+    const diff = Date.now() - new Date(date).getTime();
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) return `Hace ${days} día${days > 1 ? 's' : ''}`;
+    if (hours > 0) return `Hace ${hours} hora${hours > 1 ? 's' : ''}`;
+    if (minutes > 0) return `Hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+    return 'Hace un momento';
   };
 
   if (loading) {
@@ -184,19 +207,37 @@ export default function AdminDashboardPage() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('recent_activity')}</h3>
               <div className="space-y-4">
-                <ActivityItem icon={FileText} text={t('activity.factura')} time={t('activity.hace_2h')} />
-                <ActivityItem icon={DollarSign} text={t('activity.pago')} time={t('activity.hace_4h')} />
-                <ActivityItem icon={Wrench} text={t('activity.ticket')} time={t('activity.hace_6h')} />
-                <ActivityItem icon={Users} text={t('activity.residente')} time={t('activity.hace_1d')} />
+                {activities.length === 0 ? (
+                  <p className="text-gray-500 text-sm text-center py-4">No hay actividad reciente</p>
+                ) : (
+                  activities.map((activity: any) => {
+                    const iconMap: Record<string, any> = {
+                      FileText: FileText,
+                      DollarSign: DollarSign,
+                      Wrench: Wrench,
+                      Users: Users,
+                    };
+                    const Icon = iconMap[activity.icon] || FileText;
+                    const timeAgo = getTimeAgo(activity.time);
+                    return (
+                      <ActivityItem 
+                        key={activity.id}
+                        icon={Icon} 
+                        text={`${activity.title}${activity.description ? ` - ${activity.description}` : ''}`}
+                        time={timeAgo}
+                      />
+                    );
+                  })
+                )}
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-sm border border-gray-50 p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('quick_actions')}</h3>
               <div className="space-y-3">
-                <QuickAction icon={FileText} label={t('generate_fees')} color="blue" />
-                <QuickAction icon={DollarSign} label={t('register_payment')} color="green" />
-                <QuickAction icon={Wrench} label={t('create_ticket')} color="orange" />
-                <QuickAction icon={Calendar} label={t('reserve_area')} color="purple" />
+                <QuickAction icon={FileText} label={t('generate_fees')} color="blue" href={`/${locale}/dashboard/admin/billing/new`} />
+                <QuickAction icon={DollarSign} label={t('register_payment')} color="green" href={`/${locale}/dashboard/admin/billing`} />
+                <QuickAction icon={Wrench} label={t('create_ticket')} color="orange" href={`/${locale}/dashboard/admin/maintenance/new`} />
+                <QuickAction icon={Calendar} label={t('reserve_area')} color="purple" href={`/${locale}/dashboard/admin/reservations/new`} />
               </div>
             </div>
           </div>
@@ -296,7 +337,7 @@ function ActivityItem({ icon: Icon, text, time }: { icon: any; text: string; tim
   );
 }
 
-function QuickAction({ icon: Icon, label, color }: { icon: any; label: string; color: string }) {
+function QuickAction({ icon: Icon, label, color, href }: { icon: any; label: string; color: string; href: string }) {
   const colors = {
     blue: 'bg-blue-50 hover:bg-blue-100 text-blue-700',
     green: 'bg-green-50 hover:bg-green-100 text-green-700',
@@ -304,9 +345,12 @@ function QuickAction({ icon: Icon, label, color }: { icon: any; label: string; c
     purple: 'bg-purple-50 hover:bg-purple-100 text-purple-700',
   };
   return (
-    <button className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${colors[color as keyof typeof colors]}`}>
+    <Link
+      href={href}
+      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${colors[color as keyof typeof colors]}`}
+    >
       <Icon className="w-4 h-4" />
       <span className="font-medium text-sm">{label}</span>
-    </button>
+    </Link>
   );
 }
