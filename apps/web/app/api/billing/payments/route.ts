@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret-key');
     const { payload } = await jwtVerify(token, secret);
     const tenantId = payload.tenantId as string;
+    const userId = payload.id as string;
 
     const body = await request.json();
     const { invoiceId, amount, method, reference, date, currency } = body;
@@ -25,9 +26,29 @@ export async function POST(request: Request) {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
+    // Obtener la factura para conocer el monto y la unidad
+    const invoiceRes = await fetch(
+      `${supabaseUrl}/rest/v1/invoices?id=eq.${invoiceId}&tenant_id=eq.${tenantId}&select=amount,unit_id,currency,exchange_rate`,
+      {
+        headers: {
+          'apikey': supabaseKey!,
+          'Authorization': `Bearer ${supabaseKey!}`,
+        },
+      }
+    );
+    const invoiceData = await invoiceRes.json();
+    if (!invoiceData || invoiceData.length === 0) {
+      return NextResponse.json(
+        { error: 'Factura no encontrada' },
+        { status: 404 }
+      );
+    }
+    const invoice = invoiceData[0];
+
     // Registrar pago
     const paymentData = {
       invoice_id: invoiceId,
+      tenant_id: tenantId,
       amount,
       date: date || new Date().toISOString(),
       method,
@@ -59,9 +80,9 @@ export async function POST(request: Request) {
     const paymentDataResult = await response.json();
     const payment = paymentDataResult[0];
 
-    // Actualizar factura a PAID si se pagó el total
-    const invoiceRes = await fetch(
-      `${supabaseUrl}/rest/v1/invoices?id=eq.${invoiceId}&tenant_id=eq.${tenantId}&select=amount,payments(amount)`,
+    // Obtener IDs de cuentas contables
+    const accountsRes = await fetch(
+      `${supabaseUrl}/rest/v1/chart_of_accounts?tenant_id=eq.${tenantId}&or=(code.eq.1-01-001,code.eq.1-02-001)&select=id,code`,
       {
         headers: {
           'apikey': supabaseKey!,
@@ -69,24 +90,63 @@ export async function POST(request: Request) {
         },
       }
     );
-    const invoiceData = await invoiceRes.json();
-    if (invoiceData && invoiceData.length > 0) {
-      const invoice = invoiceData[0];
-      const totalPaid = invoice.payments?.reduce((sum: number, p: any) => sum + p.amount, 0) || 0;
-      if (totalPaid >= invoice.amount) {
-        await fetch(
-          `${supabaseUrl}/rest/v1/invoices?id=eq.${invoiceId}&tenant_id=eq.${tenantId}`,
-          {
-            method: 'PATCH',
-            headers: {
-              'apikey': supabaseKey!,
-              'Authorization': `Bearer ${supabaseKey!}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'PAID' }),
-          }
-        );
-      }
+    const accounts = await accountsRes.json();
+    const cashAccount = accounts.find((a: any) => a.code === '1-01-001')?.id;
+    const receivableAccount = accounts.find((a: any) => a.code === '1-02-001')?.id;
+
+    // Crear asiento contable si existen las cuentas
+    if (cashAccount && receivableAccount) {
+      const entryLines = [
+        {
+          account_id: cashAccount,
+          description: `Pago de factura ${invoiceId}`,
+          debit: amount,
+          credit: 0,
+        },
+        {
+          account_id: receivableAccount,
+          description: `Pago de factura ${invoiceId}`,
+          debit: 0,
+          credit: amount,
+        },
+      ];
+
+      await fetch(`${supabaseUrl}/rest/v1/accounting_entries`, {
+        method: 'POST',
+        headers: {
+          'apikey': supabaseKey!,
+          'Authorization': `Bearer ${supabaseKey!}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tenant_id: tenantId,
+          entry_date: new Date().toISOString().split('T')[0],
+          description: `Pago de factura ${invoiceId}`,
+          reference_type: 'PAYMENT',
+          reference_id: payment.id,
+          status: 'POSTED',
+          created_by: userId,
+          posted_at: new Date().toISOString(),
+          lines: entryLines,
+        }),
+      });
+    }
+
+    // Actualizar factura a PAID si se pagó el total
+    const totalPaid = invoice.payments?.reduce((sum: number, p: any) => sum + p.amount, 0) || 0;
+    if (totalPaid + amount >= invoice.amount) {
+      await fetch(
+        `${supabaseUrl}/rest/v1/invoices?id=eq.${invoiceId}&tenant_id=eq.${tenantId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'apikey': supabaseKey!,
+            'Authorization': `Bearer ${supabaseKey!}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status: 'PAID' }),
+        }
+      );
     }
 
     return NextResponse.json({ success: true, payment });
