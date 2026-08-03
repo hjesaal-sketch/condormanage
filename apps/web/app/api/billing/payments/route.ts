@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const { payload } = await jwtVerify(token, secret);
     const tenantId = payload.tenantId as string;
     const userId = payload.id as string;
-    const locale = payload.locale || 'es';
+    const locale = (payload?.locale as string) || 'es';
 
     const body = await request.json();
     const { invoiceId, amount, method, reference, date, currency } = body;
@@ -28,15 +28,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL as string;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY as string;
 
     const invoiceRes = await fetch(
       `${supabaseUrl}/rest/v1/invoices?id=eq.${invoiceId}&tenant_id=eq.${tenantId}&select=amount,unit_id,currency,exchange_rate`,
       {
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
         },
       }
     );
@@ -63,8 +63,8 @@ export async function POST(request: Request) {
     const response = await fetch(`${supabaseUrl}/rest/v1/payments`, {
       method: 'POST',
       headers: {
-        'apikey': supabaseKey!,
-        'Authorization': `Bearer ${supabaseKey!}`,
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
         'Content-Type': 'application/json',
         'Prefer': 'return=representation',
       },
@@ -87,8 +87,8 @@ export async function POST(request: Request) {
       `${supabaseUrl}/rest/v1/chart_of_accounts?tenant_id=eq.${tenantId}&or=(code.eq.1-01-001,code.eq.1-02-001)&select=id,code`,
       {
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
         },
       }
     );
@@ -115,8 +115,8 @@ export async function POST(request: Request) {
       await fetch(`${supabaseUrl}/rest/v1/accounting_entries`, {
         method: 'POST',
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -140,8 +140,8 @@ export async function POST(request: Request) {
         {
           method: 'PATCH',
           headers: {
-            'apikey': supabaseKey!,
-            'Authorization': `Bearer ${supabaseKey!}`,
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ status: 'PAID' }),
