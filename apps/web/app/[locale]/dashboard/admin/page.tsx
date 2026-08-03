@@ -19,7 +19,8 @@ import {
   LogOut,
   Server,
   CreditCard,
-  Layers
+  Layers,
+  BookOpen
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -260,6 +261,7 @@ function SidebarContent({ t, commonT, user, handleLogout, locale }: { t: any; co
       <SidebarItem icon={Wrench} label={t('maintenance')} href={`/${locale}/dashboard/admin/maintenance`} />
       <SidebarItem icon={Calendar} label={commonT('reservations')} href={`/${locale}/dashboard/admin/reservations`} />
       <SidebarItem icon={Layers} label={t('common_areas')} href={`/${locale}/dashboard/admin/common-areas`} />
+      <SidebarItem icon={BookOpen} label={t('accounting')} href={`/${locale}/dashboard/admin/accounting`} />
       <SidebarItem icon={FileText} label={commonT('documents')} href={`/${locale}/dashboard/admin/documents`} />
       <SidebarItem icon={Settings} label={commonT('settings')} href={`/${locale}/dashboard/admin/settings`} />
       <div className="pt-6 mt-6 border-t border-gray-100">
