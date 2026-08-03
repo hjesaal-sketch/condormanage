@@ -38,8 +38,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL as string;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY as string;
 
     // Crear el asiento
     const entryData = {
@@ -56,8 +56,8 @@ export async function POST(request: Request) {
     const entryResponse = await fetch(`${supabaseUrl}/rest/v1/accounting_entries`, {
       method: 'POST',
       headers: {
-        'apikey': supabaseKey!,
-        'Authorization': `Bearer ${supabaseKey!}`,
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
         'Content-Type': 'application/json',
         'Prefer': 'return=representation',
       },
@@ -90,8 +90,8 @@ export async function POST(request: Request) {
       return fetch(`${supabaseUrl}/rest/v1/accounting_entry_lines`, {
         method: 'POST',
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
           'Content-Type': 'application/json',
           'Prefer': 'return=representation',
         },
@@ -102,7 +102,8 @@ export async function POST(request: Request) {
     await Promise.all(linePromises);
 
     // Actualizar balances
-    await updateBalances(tenantId, entry_date || new Date().toISOString().split('T')[0], lines, supabaseUrl, supabaseKey);
+    const entryDate = entry_date || new Date().toISOString().split('T')[0];
+    await updateBalances(tenantId, entryDate, lines, supabaseUrl, supabaseKey);
 
     return NextResponse.json({
       success: true,
@@ -145,8 +146,8 @@ async function updateBalances(
 
     const balanceRes = await fetch(query, {
       headers: {
-        'apikey': supabaseKey!,
-        'Authorization': `Bearer ${supabaseKey!}`,
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
       },
     });
     const balanceData = await balanceRes.json();
@@ -163,8 +164,8 @@ async function updateBalances(
         {
           method: 'PATCH',
           headers: {
-            'apikey': supabaseKey!,
-            'Authorization': `Bearer ${supabaseKey!}`,
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -203,8 +204,8 @@ async function updateBalances(
       await fetch(`${supabaseUrl}/rest/v1/account_balances`, {
         method: 'POST',
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newBalance),
@@ -237,8 +238,8 @@ async function getOpeningBalance(
 
   const balanceRes = await fetch(query, {
     headers: {
-      'apikey': supabaseKey!,
-      'Authorization': `Bearer ${supabaseKey!}`,
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`,
     },
   });
   const balanceData = await balanceRes.json();
