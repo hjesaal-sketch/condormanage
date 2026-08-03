@@ -28,8 +28,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL as string;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY as string;
 
     let unitsQuery = `${supabaseUrl}/rest/v1/units?tenant_id=eq.${tenantId}&status=eq.OCCUPIED`;
     if (!applyToAll) {
@@ -38,8 +38,8 @@ export async function POST(request: Request) {
 
     const unitsRes = await fetch(unitsQuery, {
       headers: {
-        'apikey': supabaseKey!,
-        'Authorization': `Bearer ${supabaseKey!}`,
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
       },
     });
     const units = await unitsRes.json();
@@ -48,8 +48,8 @@ export async function POST(request: Request) {
       `${supabaseUrl}/rest/v1/chart_of_accounts?tenant_id=eq.${tenantId}&or=(code.eq.4-01-001,code.eq.1-02-001)&select=id,code`,
       {
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
         },
       }
     );
@@ -63,8 +63,8 @@ export async function POST(request: Request) {
         `${supabaseUrl}/rest/v1/invoices?tenant_id=eq.${tenantId}&unit_id=eq.${unit.id}&extract(month from issue_date)=eq.${month}&extract(year from issue_date)=eq.${year}`,
         {
           headers: {
-            'apikey': supabaseKey!,
-            'Authorization': `Bearer ${supabaseKey!}`,
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
           },
         }
       );
@@ -75,8 +75,8 @@ export async function POST(request: Request) {
         `${supabaseUrl}/rest/v1/invoices?tenant_id=eq.${tenantId}&issue_date=gte.${year}-${String(month).padStart(2, '0')}-01&issue_date=lt.${year}-${String(month + 1).padStart(2, '0')}-01&select=id`,
         {
           headers: {
-            'apikey': supabaseKey!,
-            'Authorization': `Bearer ${supabaseKey!}`,
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
           },
         }
       );
@@ -98,8 +98,8 @@ export async function POST(request: Request) {
       const createRes = await fetch(`${supabaseUrl}/rest/v1/invoices`, {
         method: 'POST',
         headers: {
-          'apikey': supabaseKey!,
-          'Authorization': `Bearer ${supabaseKey!}`,
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
           'Content-Type': 'application/json',
           'Prefer': 'return=representation',
         },
@@ -129,8 +129,8 @@ export async function POST(request: Request) {
         await fetch(`${supabaseUrl}/rest/v1/accounting_entries`, {
           method: 'POST',
           headers: {
-            'apikey': supabaseKey!,
-            'Authorization': `Bearer ${supabaseKey!}`,
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
