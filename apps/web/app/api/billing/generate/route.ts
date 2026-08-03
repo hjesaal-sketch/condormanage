@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const { payload } = await jwtVerify(token, secret);
     const tenantId = payload.tenantId as string;
     const userId = payload.id as string;
-    const locale = payload.locale || 'es';
+    const locale = (payload.locale as string) || 'es';
 
     const body = await request.json();
     const { month, year, amount, concept, applyToAll } = body;
