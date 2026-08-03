@@ -1,6 +1,79 @@
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
+export async function GET(request: Request) {
+  try {
+    const token = request.headers.get('Authorization')?.replace('Bearer ', '');
+    if (!token) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret-key');
+    const { payload } = await jwtVerify(token, secret);
+    const tenantId = payload.tenantId as string;
+
+    const supabaseUrl = process.env.SUPABASE_URL as string;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY as string;
+
+    const url = new URL(request.url);
+    const limit = parseInt(url.searchParams.get('limit') || '50');
+    const offset = parseInt(url.searchParams.get('offset') || '0');
+
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/accounting_entries?tenant_id=eq.${tenantId}&order=entry_date.desc&limit=${limit}&offset=${offset}`,
+      {
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: 'Error al obtener asientos contables' },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+
+    // Obtener líneas para cada asiento
+    const entriesWithLines = [];
+    for (const entry of data) {
+      const linesRes = await fetch(
+        `${supabaseUrl}/rest/v1/accounting_entry_lines?entry_id=eq.${entry.id}&select=*,account:chart_of_accounts(name)`,
+        {
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+          },
+        }
+      );
+      const lines = await linesRes.json();
+      entriesWithLines.push({
+        ...entry,
+        lines: lines.map((line: any) => ({
+          account_name: line.account?.name || 'Sin cuenta',
+          debit: line.debit,
+          credit: line.credit,
+        })),
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      data: entriesWithLines,
+    });
+  } catch (error: any) {
+    console.error('Error en GET /api/accounting/entries:', error);
+    return NextResponse.json(
+      { error: 'Error interno del servidor', message: error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const token = request.headers.get('Authorization')?.replace('Bearer ', '');
