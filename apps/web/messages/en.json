@@ -70,6 +70,7 @@
       "reserve_area": "Reserve Area",
       "no_activity": "No recent activity",
       "common_areas": "Common Areas",
+      "accounting": "Accounting",
       "time_ago_days": "{count} day ago",
       "time_ago_days_plural": "{count} days ago",
       "time_ago_hours": "{count} hour ago",
@@ -465,6 +466,40 @@
       "exchange_rate": "Exchange rate (USD/VES)",
       "exchange_rate_help": "Official BCV rate for today",
       "exchange_rate_date": "Rate date"
+    }
+  },
+  "accounting": {
+    "title": "Accounting",
+    "description": "Condominium financial management",
+    "balance_sheet": "Balance Sheet",
+    "income_statement": "Income Statement",
+    "chart_of_accounts": "Chart of Accounts",
+    "entries": "Journal Entries",
+    "reports": "Reports",
+    "total_assets": "Total Assets",
+    "total_liabilities": "Total Liabilities",
+    "total_equity": "Total Equity",
+    "total_income": "Total Income",
+    "total_expenses": "Total Expenses",
+    "net_income": "Net Income",
+    "pending_invoices": "Pending Invoices",
+    "overdue_invoices": "Overdue Invoices",
+    "total_paid": "Total Collected",
+    "morosity_rate": "Morosity Rate",
+    "no_data": "No data available",
+    "loading": "Loading...",
+    "columns": {
+      "code": "Code",
+      "name": "Name",
+      "type": "Type",
+      "category": "Category",
+      "debit": "Debit",
+      "credit": "Credit",
+      "balance": "Balance",
+      "date": "Date",
+      "description": "Description",
+      "reference": "Reference",
+      "status": "Status"
     }
   },
   "expenses": {

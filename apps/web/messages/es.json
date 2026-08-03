@@ -70,6 +70,7 @@
       "reserve_area": "Reservar Área",
       "no_activity": "No hay actividad reciente",
       "common_areas": "Áreas Comunes",
+      "accounting": "Contabilidad",           
       "time_ago_days": "Hace {count} día",
       "time_ago_days_plural": "Hace {count} días",
       "time_ago_hours": "Hace {count} hora",
@@ -465,6 +466,40 @@
       "exchange_rate": "Tasa de cambio (USD/VES)",
       "exchange_rate_help": "Tasa oficial del BCV para el día de hoy",
       "exchange_rate_date": "Fecha de la tasa"
+    }
+  },
+  "accounting": {
+    "title": "Contabilidad",
+    "description": "Gestión contable del condominio",
+    "balance_sheet": "Balance General",
+    "income_statement": "Estado de Resultados",
+    "chart_of_accounts": "Plan de Cuentas",
+    "entries": "Asientos Contables",
+    "reports": "Reportes",
+    "total_assets": "Total Activos",
+    "total_liabilities": "Total Pasivos",
+    "total_equity": "Total Patrimonio",
+    "total_income": "Total Ingresos",
+    "total_expenses": "Total Gastos",
+    "net_income": "Resultado Neto",
+    "pending_invoices": "Facturas Pendientes",
+    "overdue_invoices": "Facturas Vencidas",
+    "total_paid": "Total Cobrado",
+    "morosity_rate": "Tasa de Morosidad",
+    "no_data": "No hay datos disponibles",
+    "loading": "Cargando...",
+    "columns": {
+      "code": "Código",
+      "name": "Nombre",
+      "type": "Tipo",
+      "category": "Categoría",
+      "debit": "Débito",
+      "credit": "Crédito",
+      "balance": "Saldo",
+      "date": "Fecha",
+      "description": "Descripción",
+      "reference": "Referencia",
+      "status": "Estado"
     }
   },
   "expenses": {
