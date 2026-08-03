@@ -102,7 +102,7 @@ export async function POST(request: Request) {
     await Promise.all(linePromises);
 
     // Actualizar balances
-    await updateBalances(tenantId, entry_date, lines, supabaseUrl, supabaseKey);
+    await updateBalances(tenantId, entry_date || new Date().toISOString().split('T')[0], lines, supabaseUrl, supabaseKey);
 
     return NextResponse.json({
       success: true,
