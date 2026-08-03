@@ -1,24 +1,29 @@
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
+import { getApiMessage } from '@/lib/api-messages';
 
 export async function POST(request: Request) {
   try {
     const token = request.headers.get('Authorization')?.replace('Bearer ', '');
     if (!token) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+      return NextResponse.json(
+        { error: getApiMessage('es', 'unauthorized') },
+        { status: 401 }
+      );
     }
 
     const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret-key');
     const { payload } = await jwtVerify(token, secret);
     const tenantId = payload.tenantId as string;
     const userId = payload.id as string;
+    const locale = payload.locale || 'es';
 
     const body = await request.json();
     const { month, year, amount, concept, applyToAll } = body;
 
     if (!month || !year || !amount) {
       return NextResponse.json(
-        { error: 'Faltan campos requeridos' },
+        { error: getApiMessage(locale, 'missing_fields') },
         { status: 400 }
       );
     }
@@ -26,7 +31,6 @@ export async function POST(request: Request) {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-    // Obtener unidades activas
     let unitsQuery = `${supabaseUrl}/rest/v1/units?tenant_id=eq.${tenantId}&status=eq.OCCUPIED`;
     if (!applyToAll) {
       unitsQuery += `&id=eq.${body.unitId}`;
@@ -40,7 +44,6 @@ export async function POST(request: Request) {
     });
     const units = await unitsRes.json();
 
-    // Obtener IDs de cuentas contables
     const accountsRes = await fetch(
       `${supabaseUrl}/rest/v1/chart_of_accounts?tenant_id=eq.${tenantId}&or=(code.eq.4-01-001,code.eq.1-02-001)&select=id,code`,
       {
@@ -56,7 +59,6 @@ export async function POST(request: Request) {
 
     const invoices = [];
     for (const unit of units) {
-      // Verificar si ya existe factura para esta unidad y mes
       const checkRes = await fetch(
         `${supabaseUrl}/rest/v1/invoices?tenant_id=eq.${tenantId}&unit_id=eq.${unit.id}&extract(month from issue_date)=eq.${month}&extract(year from issue_date)=eq.${year}`,
         {
@@ -69,7 +71,6 @@ export async function POST(request: Request) {
       const existing = await checkRes.json();
       if (existing.length > 0) continue;
 
-      // Generar número de factura
       const countRes = await fetch(
         `${supabaseUrl}/rest/v1/invoices?tenant_id=eq.${tenantId}&issue_date=gte.${year}-${String(month).padStart(2, '0')}-01&issue_date=lt.${year}-${String(month + 1).padStart(2, '0')}-01&select=id`,
         {
@@ -108,7 +109,6 @@ export async function POST(request: Request) {
       const invoice = result[0];
       invoices.push(invoice);
 
-      // Crear asiento contable si existen las cuentas
       if (incomeAccount && receivableAccount) {
         const entryLines = [
           {
@@ -148,15 +148,19 @@ export async function POST(request: Request) {
       }
     }
 
+    const message = invoices.length === 1
+      ? getApiMessage(locale, 'invoice_generated')
+      : getApiMessage(locale, 'invoices_generated');
+
     return NextResponse.json({
       success: true,
-      message: `Generadas ${invoices.length} facturas`,
+      message: `${message} (${invoices.length})`,
       invoices,
     });
   } catch (error: any) {
     console.error('Error en POST /api/billing/generate:', error);
     return NextResponse.json(
-      { error: 'Error interno del servidor', message: error.message },
+      { error: getApiMessage('es', 'server_error'), message: error.message },
       { status: 500 }
     );
   }
