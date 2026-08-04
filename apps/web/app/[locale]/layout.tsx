@@ -4,6 +4,7 @@ import { locales, isValidLocale } from '@/i18n/request';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/globals.css';
+import Credits from '@/components/modules/common/Credits';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -63,6 +64,7 @@ export default function LocaleLayout({
           timeZone="America/Caracas"
         >
           {children}
+          <Credits />
         </NextIntlClientProvider>
       </body>
     </html>

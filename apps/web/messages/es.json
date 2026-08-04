@@ -392,6 +392,10 @@
     "no_areas": "No hay áreas comunes registradas",
     "confirm_delete": "¿Estás seguro de eliminar esta área?"
   },
+  "credits": {
+    "developed_by": "Desarrollado por",
+    "version": "Versión"
+  },
   "documents": {
     "title": "Documentos",
     "new": "Nuevo Documento",
