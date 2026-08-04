@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Instagram, User } from 'lucide-react';
+import { Camera, User } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Credits() {
@@ -29,7 +29,7 @@ export default function Credits() {
             className="text-pink-600 hover:text-pink-800 transition-colors ml-1"
             aria-label="Instagram"
           >
-            <Instagram className="w-3.5 h-3.5 inline" />
+            <Camera className="w-3.5 h-3.5 inline" />
           </Link>
           <Link
             href="https://www.threads.com/@eosconnecting"
