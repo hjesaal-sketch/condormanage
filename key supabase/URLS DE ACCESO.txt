@@ -15,3 +15,12 @@ resident@condormanage.com	resident123	RESIDENT  ✅ Creado
 Staff: https://condormanage-dpx7.vercel.app/dashboard/staff
 
 staff@condormanage.com	        staff123	STAFF     ✅ Creado
+
+
+URLS POR IDIOMAS
+https://condormanage-dpx7.vercel.app/es/login
+https://condormanage-dpx7.vercel.app/en/login
+https://condormanage-dpx7.vercel.app/pt/login
+
+
+
